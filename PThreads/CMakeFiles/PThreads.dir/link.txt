@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11  -rdynamic CMakeFiles/PThreads.dir/src/main.cpp.o CMakeFiles/PThreads.dir/src/customer.cpp.o CMakeFiles/PThreads.dir/src/customerCounter.cpp.o CMakeFiles/PThreads.dir/src/display.cpp.o CMakeFiles/PThreads.dir/src/numberGenerator.cpp.o  -o PThreads -lpthread 
