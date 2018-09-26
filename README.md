@@ -1,5 +1,5 @@
 # programming-htlwrn
-Contains all my programming homeworks, because I
+Contains all my programming homeworks
 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
