@@ -1,3 +1,0 @@
-/home/koka/workspace/programming-htlwrn/PThreads/CMakeFiles/rebuild_cache.dir
-/home/koka/workspace/programming-htlwrn/PThreads/CMakeFiles/PThreads.dir
-/home/koka/workspace/programming-htlwrn/PThreads/CMakeFiles/edit_cache.dir
