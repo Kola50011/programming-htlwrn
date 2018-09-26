@@ -2,12 +2,16 @@ Implementieren Sie das Kundenschalter System der Post:
 
 ein Wartenummern-Automat:
 Gibt ein Ticket mit einer inkrementell wachsenden Nummer an den jeweils nächsten Kunden aus.
+
 Kunde (Kunden-Thread):
 Holt sich beim Automaten eine Nummer. Wartet danach bis seine Nummer mit dem freien Schalter auf dem Display erscheint. Erledigt dann am entsprechenden Schalter sein Geschäft.
+
 ein Display:
 gibt jeweils ein Signal, wenn ein Schalter frei wird und zeigt inkrementelle Nummer und freien Schalter an.
+
 vier Schalter (Schalter-Thread):
 drückt einen Knopf, welcher die Frei-Anzeige am Display auslöst. Nimmt Kunden entgegen und bearbeitet sein Geschäft.
+
 Beachten Sie dabei:
 die Schalter sind als jeweils eigenständige Threads zu programmieren
 ein Schalter soll so implementiert werden, dass er nur einen Kunden auf einmal bedienen kann
