@@ -1,40 +1,49 @@
-#include "numberGenerator.h"
 #include "display.h"
 #include "customer.h"
+#include "customerCounter.h"
+#include "numberGenerator.h"
 
-#include <pthread.h>
+#include <thread>
 #include <iostream>
+#include <unistd.h>
 
-#define CUSTOMERS 1
-#define COUNTERS 1
+#define COUNTERS 5
+
+void createCustomers(Display *display)
+{
+    std::cout << "Creating customers" << std::endl;
+    NumberGenerator numberGenerator = NumberGenerator();
+    while (true)
+    {
+        int customerNumber = numberGenerator.getNumber();
+        std::cout << "\tCustomer " << customerNumber << " created " << std::endl;
+        Customer *customer = new Customer(customerNumber, display);
+        std::thread t(&Customer::waitForFreeCounter, customer);
+        t.detach();
+        usleep(1000000 * 1);
+    }
+}
+
+void createCounters(Display *display)
+{
+    std::cout << "Creating counters" << std::endl;
+    for (int i = 0; i < COUNTERS; i++)
+    {
+        CustomerCounter *counter = new CustomerCounter(i, display);
+        std::thread t(&CustomerCounter::work, counter);
+        t.detach();
+    }
+}
 
 int main(int argc, char const *argv[])
 {
     std::cout << "Started" << std::endl;
 
-    pthread_t customers[CUSTOMERS];
+    Display *display = new Display();
 
-    NumberGenerator numberGenerator = NumberGenerator();
-    Display display = Display();
+    std::thread createCountersThread(&createCounters, display);
+    std::thread createCustomersThread(&createCustomers, display);
 
-    std::cout << "Creating customers" << std::endl;
-    for (int i = 0; i < CUSTOMERS; i++)
-    {
-        int customerNumber = numberGenerator.getNumber();
-        std::cout << "\tCustomer " << customerNumber << " created" << std::endl;
-        Customer customer = Customer(customerNumber, display);
-        pthread_create(&customers[i], NULL, Customer::waitForFreeCounter, &customer);
-    }
-    std::cout << "Customers created" << std::endl;
-
-    display.setFreeCustomerCounter(1);
-    display.setFreeCustomerCounter(2);
-
-    for (int i = 0; i < CUSTOMERS; i++)
-    {
-        pthread_join(customers[i], NULL);
-    }
-
-    std::cout << "Done" << std::endl;
+    usleep(1000000 * 60); // Stop after 60 secs
     return 0;
 }

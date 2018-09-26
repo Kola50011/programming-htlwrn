@@ -1,39 +1,49 @@
 #include "display.h"
+#include "customerCounter.h"
+
+#include <iostream>
+#include <unistd.h>
 
 Display::Display()
 {
     ticketNumber = 0;
-    pthread_mutex_init(&lock, NULL);
-    pthread_cond_init(&condition, NULL);
+    empty = true;
+    pthread_mutex_init(&lock, 0);
+    pthread_cond_init(&counterFreeCondition, 0);
+    pthread_cond_init(&respondedCondition, 0);
 }
 
 Display::~Display()
 {
 }
 
-void Display::setFreeCustomerCounter(int _customerCounter)
+void Display::waitForCustomerResponse()
 {
-    customerCounter = _customerCounter;
-    ticketNumber++;
-    pthread_cond_broadcast(&condition);
+    while (empty == false)
+    {
+        pthread_cond_wait(&respondedCondition, &lock);
+    }
 }
 
-int Display::getFreeCustomerCounter()
+void Display::setFreeCustomerCounter(CustomerCounter *_customerCounter)
+{
+    pthread_mutex_lock(&lock);
+
+    waitForCustomerResponse();
+    empty = false;
+    customerCounter = _customerCounter;
+    ticketNumber++;
+    pthread_cond_broadcast(&counterFreeCondition);
+
+    pthread_mutex_unlock(&lock);
+}
+
+CustomerCounter *Display::getCustomerCounter()
 {
     return customerCounter;
 }
 
-int Display::getTicketNumber()
+const int Display::getTicketNumber()
 {
     return ticketNumber;
-}
-
-pthread_mutex_t Display::getLock()
-{
-    return lock;
-}
-
-pthread_cond_t Display::getCondition()
-{
-    return condition;
 }

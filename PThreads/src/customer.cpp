@@ -1,10 +1,11 @@
-#include "display.h"
 #include "customer.h"
+#include "customerCounter.h"
+#include "display.h"
 
 #include <pthread.h>
 #include <iostream>
 
-Customer::Customer(int _ticketNumber, Display _display)
+Customer::Customer(int _ticketNumber, Display *_display)
 {
     ticketNumber = _ticketNumber;
     display = _display;
@@ -14,23 +15,35 @@ Customer::~Customer()
 {
 }
 
-void *Customer::waitForFreeCounter(void *p)
+void Customer::respondToDisplay()
 {
-    static_cast<Customer *>(p)->waitForFreeCounter();
+    display->empty = true;
+    pthread_cond_broadcast(&display->respondedCondition);
 }
 
 void Customer::waitForFreeCounter()
 {
-    std::cout << "Waiting for ticket " << ticketNumber << std::endl;
+    pthread_mutex_lock(&display->lock);
 
-    pthread_mutex_t lock = display.getLock();
-    pthread_cond_t condition = display.getCondition();
-    pthread_mutex_lock(&lock);
-    while (display.getTicketNumber() != ticketNumber)
+    waitForCorrectTicketNumber();
+    respondToDisplay();
+
+    CustomerCounter *counter = display->getCustomerCounter();
+
+    pthread_mutex_unlock(&display->lock);
+
+    counter->handleCustomer(this);
+}
+
+void Customer::waitForCorrectTicketNumber()
+{
+    while (display->getTicketNumber() != ticketNumber)
     {
-        std::cout << "\tWrong ticket " << display.getTicketNumber() << std::endl;
-        pthread_cond_wait(&condition, &lock);
+        pthread_cond_wait(&display->counterFreeCondition, &display->lock);
     }
-    std::cout << ticketNumber << " going to " << display.getFreeCustomerCounter() << std::endl;
-    pthread_mutex_unlock(&lock);
+}
+
+const int Customer::getTicketNumber()
+{
+    return ticketNumber;
 }

@@ -3,15 +3,21 @@
 
 CMakeFiles/PThreads.dir/src/customer.cpp.o
  ./include/customer.h
+ ./include/customerCounter.h
  ./include/display.h
  /home/koka/workspace/programming-htlwrn/PThreads/src/customer.cpp
 CMakeFiles/PThreads.dir/src/customerCounter.cpp.o
+ ./include/customer.h
+ ./include/customerCounter.h
+ ./include/display.h
  /home/koka/workspace/programming-htlwrn/PThreads/src/customerCounter.cpp
 CMakeFiles/PThreads.dir/src/display.cpp.o
+ ./include/customerCounter.h
  ./include/display.h
  /home/koka/workspace/programming-htlwrn/PThreads/src/display.cpp
 CMakeFiles/PThreads.dir/src/main.cpp.o
  ./include/customer.h
+ ./include/customerCounter.h
  ./include/display.h
  ./include/numberGenerator.h
  /home/koka/workspace/programming-htlwrn/PThreads/src/main.cpp

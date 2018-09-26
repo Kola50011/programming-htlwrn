@@ -1,21 +1,30 @@
 #pragma once
 
+#pragma once
 #include <pthread.h>
 
+class CustomerCounter;
 class Display
 {
 private:
+  CustomerCounter *customerCounter;
   int ticketNumber;
-  int customerCounter;
-  pthread_cond_t condition;
-  pthread_mutex_t lock;
+
+  void waitForCustomerResponse();
 
 public:
   Display();
   ~Display();
-  void setFreeCustomerCounter(int counter);
-  int getFreeCustomerCounter();
-  int getTicketNumber();
-  pthread_mutex_t getLock();
-  pthread_cond_t getCondition();
+  void setFreeCustomerCounter(CustomerCounter *counter);
+
+  bool empty;
+
+  // Need to be public as they dont't work , if I make getters
+  pthread_cond_t counterFreeCondition;
+  pthread_cond_t respondedCondition;
+  pthread_mutex_t lock;
+
+  // Getter + Setter
+  CustomerCounter *getCustomerCounter();
+  const int getTicketNumber();
 };

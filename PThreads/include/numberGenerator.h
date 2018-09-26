@@ -1,3 +1,4 @@
+#pragma once
 class NumberGenerator
 {
 private:
@@ -6,5 +7,7 @@ private:
 public:
   NumberGenerator();
   ~NumberGenerator();
+
+  // Getter + Setter
   int getNumber();
 };

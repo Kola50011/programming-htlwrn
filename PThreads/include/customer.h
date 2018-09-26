@@ -1,14 +1,20 @@
 #pragma once
 
+class Display;
 class Customer
 {
 private:
+  Display *display;
   int ticketNumber;
-  Display display;
+
+  void respondToDisplay();
+  void waitForCorrectTicketNumber();
 
 public:
-  Customer(int _ticketNumber, Display _display);
+  Customer(int _ticketNumber, Display *_display);
   ~Customer();
   void waitForFreeCounter();
-  static void *waitForFreeCounter(void *p);
+
+  // Getter + Setter
+  const int getTicketNumber();
 };

@@ -8,6 +8,8 @@
 
 ./include/customer.h
 
+./include/customerCounter.h
+
 ./include/display.h
 pthread.h
 -
@@ -15,31 +17,55 @@ pthread.h
 ./include/numberGenerator.h
 
 /home/koka/workspace/programming-htlwrn/PThreads/src/customer.cpp
-display.h
-/home/koka/workspace/programming-htlwrn/PThreads/src/display.h
 customer.h
 /home/koka/workspace/programming-htlwrn/PThreads/src/customer.h
+customerCounter.h
+/home/koka/workspace/programming-htlwrn/PThreads/src/customerCounter.h
+display.h
+/home/koka/workspace/programming-htlwrn/PThreads/src/display.h
 pthread.h
 -
 iostream
 -
 
 /home/koka/workspace/programming-htlwrn/PThreads/src/customerCounter.cpp
+customerCounter.h
+/home/koka/workspace/programming-htlwrn/PThreads/src/customerCounter.h
+customer.h
+/home/koka/workspace/programming-htlwrn/PThreads/src/customer.h
+display.h
+/home/koka/workspace/programming-htlwrn/PThreads/src/display.h
+cstdlib
+-
+unistd.h
+-
+iostream
+-
 
 /home/koka/workspace/programming-htlwrn/PThreads/src/display.cpp
 display.h
 /home/koka/workspace/programming-htlwrn/PThreads/src/display.h
+customerCounter.h
+/home/koka/workspace/programming-htlwrn/PThreads/src/customerCounter.h
+iostream
+-
+unistd.h
+-
 
 /home/koka/workspace/programming-htlwrn/PThreads/src/main.cpp
-numberGenerator.h
-/home/koka/workspace/programming-htlwrn/PThreads/src/numberGenerator.h
 display.h
 /home/koka/workspace/programming-htlwrn/PThreads/src/display.h
 customer.h
 /home/koka/workspace/programming-htlwrn/PThreads/src/customer.h
-pthread.h
+customerCounter.h
+/home/koka/workspace/programming-htlwrn/PThreads/src/customerCounter.h
+numberGenerator.h
+/home/koka/workspace/programming-htlwrn/PThreads/src/numberGenerator.h
+thread
 -
 iostream
+-
+unistd.h
 -
 
 /home/koka/workspace/programming-htlwrn/PThreads/src/numberGenerator.cpp
