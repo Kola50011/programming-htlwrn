@@ -5,6 +5,8 @@ $ cmake .
 $ make all && ./PThreads
 ```
 
+# Information
+
 Implementieren Sie das Kundenschalter System der Post:
 
 ein Wartenummern-Automat:
