@@ -1,3 +1,9 @@
+///////////////////////////////////
+// Author: Konstantin Lampalzer  //
+// Date: 26.09.2018              //
+// Project: PThreads             //
+///////////////////////////////////
+
 #include "display.h"
 #include "customerCounter.h"
 
