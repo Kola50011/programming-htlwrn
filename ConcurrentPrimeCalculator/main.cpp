@@ -74,7 +74,7 @@ int Check(int maxToCheck) {
 }
 
 int main() {
-    Check(100);
+    Check(1000);
 
     return 0;
 }
