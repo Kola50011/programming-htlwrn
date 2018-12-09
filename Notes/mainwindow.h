@@ -31,13 +31,16 @@ private slots:
 
     void on_noteText_textChanged();
 
+    void on_actionSave_triggered();
+
 private:
     Ui::MainWindow *ui;
     std::vector<Note> notes;
 
     void addNote(Note &note);
     void displayNote(Note &note);
-    void loadFiles();
+    void loadNotes();
+    void saveNotes();
 };
 
 #endif // MAINWINDOW_H

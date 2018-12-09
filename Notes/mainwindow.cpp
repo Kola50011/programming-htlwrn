@@ -8,10 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Note toAdd("Lorem", "Ipsum");
-    addNote(toAdd);
-
-    loadFiles();
+    loadNotes();
 }
 
 void MainWindow::addNote(Note& note) {
@@ -68,23 +65,50 @@ void MainWindow::on_noteText_textChanged()
     }
 }
 
-void MainWindow::loadFiles()
+void MainWindow::loadNotes()
 {
-    QDir dir("/home/koka/Desktop/test");
-    foreach(auto entry, dir.entryInfoList()) {
-        if (entry.isFile()) {
-            QFile file(entry.absoluteFilePath());
+//    QDir dir("/home/koka/Desktop/test");
+//    foreach(auto entry, dir.entryInfoList()) {
+//        if (entry.isFile()) {
+//            QFile file(entry.absoluteFilePath());
 
-            if (file.open(QFile::ReadOnly | QFile::Text)) {
-                QTextStream stream(&file);
+//            if (file.open(QFile::ReadOnly | QFile::Text)) {
+//                QTextStream stream(&file);
 
-                QFileInfo fileInfo(file.fileName());
-                Note toAdd(fileInfo.fileName(), stream.readAll());
-                toAdd.filePath = entry.absoluteFilePath();
-                file.close();
+//                QFileInfo fileInfo(file.fileName());
+//                Note toAdd(fileInfo.fileName(), stream.readAll());
+//                toAdd.filePath = entry.absoluteFilePath();
+//                file.close();
 
-                addNote(toAdd);
-            }
-        }
+//                addNote(toAdd);
+//            }
+//        }
+//    }
+
+    QFile saveFile(QDir::homePath() + "/notes");
+    if (saveFile.open(QFile::ReadOnly)) {
+        QDataStream stream(&saveFile);
+
+        saveFile.close();
+    } else {
+        std::cerr << "Could not open saveFile" << std::endl;
     }
+}
+
+void MainWindow::saveNotes() {
+    QFile saveFile(QDir::homePath() + "/notes");
+    if (saveFile.open(QFile::WriteOnly|QFile::Truncate)) {
+        QDataStream out(&saveFile);
+        foreach (Note note, notes) {
+            out << note << std::endl;
+        }
+        saveFile.close();
+    } else {
+        std::cerr << "Could not open saveFile" << std::endl;
+    }
+}
+
+void MainWindow::on_actionSave_triggered()
+{
+    saveNotes();
 }
