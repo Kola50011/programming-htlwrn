@@ -6,6 +6,9 @@
 #include <vector>
 #include "note.h"
 #include "QDir"
+#include <QPainter>
+#include <QPaintEvent>
+#include <QRectF>
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +35,18 @@ private slots:
     void on_noteText_textChanged();
 
     void on_actionSave_triggered();
+
+    void on_actionDelete_triggered();
+
+protected:
+    void paintEvent(QPaintEvent * event)
+    {
+        QMainWindow::paintEvent(event);
+        QPainter p(this);
+
+        QRectF rectangle(10.0, 20.0, 80.0, 60.0);
+        p.drawRect(rectangle);
+    }
 
 private:
     Ui::MainWindow *ui;

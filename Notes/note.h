@@ -9,6 +9,7 @@ class Note
 {
 public:
     Note(QString _title, QString _text) : title{_title}, text{_text} {};
+    Note() {};
     QString title;
     QString text;
     QString filePath;

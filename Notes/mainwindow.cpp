@@ -51,7 +51,7 @@ void MainWindow::on_noteList_itemSelectionChanged()
 
 void MainWindow::on_noteTitle_textEdited(const QString &text)
 {
-    Note toDisplay = notes.at(ui->noteList->currentRow());
+    Note &toDisplay = notes[ui->noteList->currentRow()];
     toDisplay.title = text;
     displayNote(toDisplay);
 }
@@ -60,34 +60,25 @@ void MainWindow::on_noteText_textChanged()
 {
     int idx = ui->noteList->currentRow();
     if (idx != -1) {
-        Note toDisplay = notes.at(idx);
+        Note &toDisplay = notes[idx];
         toDisplay.text = ui->noteText->toPlainText();
     }
 }
 
 void MainWindow::loadNotes()
 {
-//    QDir dir("/home/koka/Desktop/test");
-//    foreach(auto entry, dir.entryInfoList()) {
-//        if (entry.isFile()) {
-//            QFile file(entry.absoluteFilePath());
-
-//            if (file.open(QFile::ReadOnly | QFile::Text)) {
-//                QTextStream stream(&file);
-
-//                QFileInfo fileInfo(file.fileName());
-//                Note toAdd(fileInfo.fileName(), stream.readAll());
-//                toAdd.filePath = entry.absoluteFilePath();
-//                file.close();
-
-//                addNote(toAdd);
-//            }
-//        }
-//    }
-
+    std::cout << "Loading" << std::endl;
     QFile saveFile(QDir::homePath() + "/notes");
     if (saveFile.open(QFile::ReadOnly)) {
         QDataStream stream(&saveFile);
+        int size;
+        stream >> size;
+
+        for (int i = 0; i < size; i++) {
+            Note note;
+            stream >> note;
+            addNote(note);
+        }
 
         saveFile.close();
     } else {
@@ -96,11 +87,14 @@ void MainWindow::loadNotes()
 }
 
 void MainWindow::saveNotes() {
+    std::cout << "Saving" << std::endl;
     QFile saveFile(QDir::homePath() + "/notes");
     if (saveFile.open(QFile::WriteOnly|QFile::Truncate)) {
         QDataStream out(&saveFile);
+        int size{notes.size()};
+        out << size;
         foreach (Note note, notes) {
-            out << note << std::endl;
+            out << note;
         }
         saveFile.close();
     } else {
@@ -111,4 +105,11 @@ void MainWindow::saveNotes() {
 void MainWindow::on_actionSave_triggered()
 {
     saveNotes();
+}
+
+void MainWindow::on_actionDelete_triggered()
+{
+    int idx = ui->noteList->currentRow();
+    delete ui->noteList->takeItem(idx);
+    notes.erase(notes.begin() + idx);
 }

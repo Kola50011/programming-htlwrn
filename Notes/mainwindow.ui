@@ -82,7 +82,7 @@
        </spacer>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="textRegion" stretch="0,0">
+       <layout class="QVBoxLayout" name="textRegion" stretch="0,0,0">
         <property name="spacing">
          <number>6</number>
         </property>
@@ -100,6 +100,9 @@
         </item>
         <item>
          <widget class="QTextEdit" name="noteText">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -113,6 +116,22 @@
           </property>
           <property name="layoutDirection">
            <enum>Qt::LeftToRight</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="PaintWidget" name="notePaint" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>150</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -148,7 +167,7 @@
      <string>File</string>
     </property>
     <addaction name="actionNew"/>
-    <addaction name="actionOpen"/>
+    <addaction name="actionDelete"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
@@ -160,21 +179,10 @@
     <string>New</string>
    </property>
    <property name="toolTip">
-    <string>New Note File</string>
+    <string>Create new note</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
-   </property>
-  </action>
-  <action name="actionOpen">
-   <property name="text">
-    <string>Open</string>
-   </property>
-   <property name="toolTip">
-    <string>Open Note File</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="actionSave">
@@ -182,7 +190,7 @@
     <string>Save</string>
    </property>
    <property name="toolTip">
-    <string>Save Note File</string>
+    <string>Save all notes</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -192,12 +200,34 @@
    <property name="text">
     <string>Exit</string>
    </property>
+   <property name="toolTip">
+    <string>Abort mission !</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
   </action>
+  <action name="actionDelete">
+   <property name="text">
+    <string>Delete</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete selected note</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>PaintWidget</class>
+   <extends>QWidget</extends>
+   <header>paintwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
