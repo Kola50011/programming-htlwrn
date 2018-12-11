@@ -177,6 +177,7 @@
      <string>Drawing</string>
     </property>
     <addaction name="actionColor"/>
+    <addaction name="actionErase"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDrawing"/>
@@ -231,6 +232,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionErase">
+   <property name="text">
+    <string>Erase</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
  </widget>

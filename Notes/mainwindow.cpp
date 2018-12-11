@@ -138,3 +138,8 @@ void MainWindow::on_actionColor_triggered()
         ui->notePaint->penColor = color;
     }
 }
+
+void MainWindow::on_actionErase_triggered()
+{
+    ui->notePaint->penColor = Qt::white;
+}

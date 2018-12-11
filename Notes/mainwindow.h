@@ -44,6 +44,8 @@ private slots:
 
     void on_actionColor_triggered();
 
+    void on_actionErase_triggered();
+
 protected:
     void paintEvent(QPaintEvent * event)
     {
