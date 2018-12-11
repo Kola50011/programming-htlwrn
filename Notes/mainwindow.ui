@@ -172,7 +172,14 @@
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuDrawing">
+    <property name="title">
+     <string>Drawing</string>
+    </property>
+    <addaction name="actionColor"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuDrawing"/>
   </widget>
   <action name="actionNew">
    <property name="text">
@@ -216,6 +223,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionColor">
+   <property name="text">
+    <string>Choose color</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
    </property>
   </action>
  </widget>

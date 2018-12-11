@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     note.cpp \
-    paintwidget.cpp
+    paintwidget.cpp \
+    point.cpp
 
 HEADERS += \
         mainwindow.h \
     note.h \
-    paintwidget.h
+    paintwidget.h \
+    point.h
 
 FORMS += \
         mainwindow.ui

@@ -47,7 +47,7 @@ void PaintWidget::mousePressEvent(QMouseEvent *event)
 void PaintWidget::mouseMoveEvent(QMouseEvent *event)
 {
     if (painting) {
-        points.push_back(event->pos());
+        points.push_back(Point(event->pos(), penColor));
 
         QPainter painter(&image);
         painter.setPen(QPen(penColor, penWidth, Qt::SolidLine, Qt::RoundCap,
@@ -64,4 +64,23 @@ void PaintWidget::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         painting = false;
     }
+    emit(clicked());
+}
+
+void PaintWidget::clearImage()
+{
+    image.fill(qRgb(255, 255, 255));
+    points.clear();
+    update();
+}
+
+void PaintWidget::drawPoints(QVector<Point> _points) {
+    points = _points;
+    QPainter painter(&image);
+    foreach (Point point, points) {
+        painter.setPen(QPen(point.color, penWidth, Qt::SolidLine, Qt::RoundCap,
+                            Qt::RoundJoin));
+        painter.drawPoint(point.point);
+    }
+    update();
 }

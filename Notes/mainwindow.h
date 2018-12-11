@@ -9,6 +9,7 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QRectF>
+#include <QColorDialog>
 
 namespace Ui {
 class MainWindow;
@@ -21,6 +22,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void load();
 
 private slots:
 
@@ -37,6 +39,10 @@ private slots:
     void on_actionSave_triggered();
 
     void on_actionDelete_triggered();
+
+    void on_notePaint_clicked();
+
+    void on_actionColor_triggered();
 
 protected:
     void paintEvent(QPaintEvent * event)
@@ -56,6 +62,7 @@ private:
     void displayNote(Note &note);
     void loadNotes();
     void saveNotes();
+    QColorDialog colorDialog;
 };
 
 #endif // MAINWINDOW_H

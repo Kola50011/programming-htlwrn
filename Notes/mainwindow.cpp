@@ -8,6 +8,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QObject::connect(ui->notePaint, SIGNAL(clicked()),
+                     this, SLOT(on_notePaint_clicked()));
+}
+
+void MainWindow::load() {
     loadNotes();
 }
 
@@ -26,6 +31,8 @@ void MainWindow::displayNote(Note& note) {
     if (ui->noteList->currentItem()) {
         ui->noteList->currentItem()->setText(note.title);
     }
+    ui->notePaint->clearImage();
+    ui->notePaint->drawPoints(note.points);
 }
 
 MainWindow::~MainWindow()
@@ -35,7 +42,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionNew_triggered()
 {
-    Note toAdd("Title", "Text");
+    Note toAdd("Title", "Text", {});
     addNote(toAdd);
 }
 
@@ -112,4 +119,22 @@ void MainWindow::on_actionDelete_triggered()
     int idx = ui->noteList->currentRow();
     delete ui->noteList->takeItem(idx);
     notes.erase(notes.begin() + idx);
+    ui->notePaint->clearImage();
+}
+
+void MainWindow::on_notePaint_clicked()
+{
+    int idx = ui->noteList->currentRow();
+    if (idx != -1) {
+        Note &toChange = notes[idx];
+        toChange.points = ui->notePaint->points;
+    }
+}
+
+void MainWindow::on_actionColor_triggered()
+{
+    QColor color = QColorDialog::getColor(ui->notePaint->penColor, this);
+    if (color.isValid()) {
+        ui->notePaint->penColor = color;
+    }
 }

@@ -10,16 +10,22 @@
 #include <QImage>
 #include <QResizeEvent>
 #include <QSize>
+#include "point.h"
 
 class PaintWidget : public QWidget
 {
     Q_OBJECT
 public:
     explicit PaintWidget(QWidget *parent = nullptr);
+    void drawPoints(QVector<Point> _points);
+    QVector<Point> points;
+    QColor penColor = Qt::black;
 
 signals:
+    void clicked();
 
 public slots:
+    void clearImage();
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -33,8 +39,6 @@ private:
 
     bool painting;
     int penWidth = 10;
-    QColor penColor = Qt::black;
-    QVector<QPoint> points;
     QImage image;
 };
 
