@@ -4,7 +4,6 @@
 
 PaintWidget::PaintWidget(QWidget *parent) : QWidget(parent)
 {
-
 }
 
 void PaintWidget::paintEvent(QPaintEvent *event)
@@ -16,7 +15,8 @@ void PaintWidget::paintEvent(QPaintEvent *event)
 
 void PaintWidget::resizeEvent(QResizeEvent *event)
 {
-    if (width() > image.width() || height() > image.height()) {
+    if (width() > image.width() || height() > image.height())
+    {
         int newWidth = qMax(width() + 128, image.width());
         int newHeight = qMax(height() + 128, image.height());
         resizeImage(&image, QSize(newWidth, newHeight));
@@ -39,14 +39,16 @@ void PaintWidget::resizeImage(QImage *image, const QSize &newSize)
 
 void PaintWidget::mousePressEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton) {
+    if (event->button() == Qt::LeftButton)
+    {
         painting = true;
     }
 }
 
 void PaintWidget::mouseMoveEvent(QMouseEvent *event)
 {
-    if (painting) {
+    if (painting)
+    {
         points.push_back(Point(event->pos(), penColor));
 
         QPainter painter(&image);
@@ -61,7 +63,8 @@ void PaintWidget::mouseMoveEvent(QMouseEvent *event)
 
 void PaintWidget::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton) {
+    if (event->button() == Qt::LeftButton)
+    {
         painting = false;
     }
     emit(clicked());
@@ -74,10 +77,12 @@ void PaintWidget::clearImage()
     update();
 }
 
-void PaintWidget::drawPoints(QVector<Point> _points) {
+void PaintWidget::drawPoints(QVector<Point> _points)
+{
     points = _points;
     QPainter painter(&image);
-    foreach (Point point, points) {
+    foreach (Point point, points)
+    {
         painter.setPen(QPen(point.color, penWidth, Qt::SolidLine, Qt::RoundCap,
                             Qt::RoundJoin));
         painter.drawPoint(point.point);

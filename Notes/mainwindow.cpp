@@ -3,32 +3,38 @@
 #include <iostream>
 #include <QTextStream>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+using namespace std;
+
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
+                                          ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     QObject::connect(ui->notePaint, SIGNAL(clicked()),
                      this, SLOT(on_notePaint_clicked()));
 }
 
-void MainWindow::load() {
+void MainWindow::load()
+{
     loadNotes();
 }
 
-void MainWindow::addNote(Note& note) {
+void MainWindow::addNote(Note &note)
+{
     notes.push_back(note);
     ui->noteList->addItem(note.title);
 
-    if ( notes.size() == 1) {
+    if (notes.size() == 1)
+    {
         displayNote(note);
     }
 }
 
-void MainWindow::displayNote(Note& note) {
+void MainWindow::displayNote(Note &note)
+{
     ui->noteTitle->setText(note.title);
     ui->noteText->setText(note.text);
-    if (ui->noteList->currentItem()) {
+    if (ui->noteList->currentItem())
+    {
         ui->noteList->currentItem()->setText(note.title);
     }
     ui->notePaint->clearImage();
@@ -66,7 +72,8 @@ void MainWindow::on_noteTitle_textEdited(const QString &text)
 void MainWindow::on_noteText_textChanged()
 {
     int idx = ui->noteList->currentRow();
-    if (idx != -1) {
+    if (idx != -1)
+    {
         Note &toDisplay = notes[idx];
         toDisplay.text = ui->noteText->toPlainText();
     }
@@ -76,35 +83,44 @@ void MainWindow::loadNotes()
 {
     std::cout << "Loading" << std::endl;
     QFile saveFile(QDir::homePath() + "/notes");
-    if (saveFile.open(QFile::ReadOnly)) {
+    if (saveFile.open(QFile::ReadOnly))
+    {
         QDataStream stream(&saveFile);
         int size;
         stream >> size;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++)
+        {
             Note note;
             stream >> note;
             addNote(note);
         }
 
         saveFile.close();
-    } else {
+    }
+    else
+    {
         std::cerr << "Could not open saveFile" << std::endl;
     }
 }
 
-void MainWindow::saveNotes() {
+void MainWindow::saveNotes()
+{
     std::cout << "Saving" << std::endl;
     QFile saveFile(QDir::homePath() + "/notes");
-    if (saveFile.open(QFile::WriteOnly|QFile::Truncate)) {
+    if (saveFile.open(QFile::WriteOnly | QFile::Truncate))
+    {
         QDataStream out(&saveFile);
         int size{notes.size()};
         out << size;
-        foreach (Note note, notes) {
+        foreach (Note note, notes)
+        {
             out << note;
         }
         saveFile.close();
-    } else {
+    }
+    else
+    {
         std::cerr << "Could not open saveFile" << std::endl;
     }
 }
@@ -116,16 +132,25 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionDelete_triggered()
 {
+    cout << notes.size() << endl;
+    if (notes.size() == 1)
+    {
+        Note toAdd("Title", "Text", {});
+        addNote(toAdd);
+    }
+
     int idx = ui->noteList->currentRow();
+
+    ui->notePaint->clearImage();
     delete ui->noteList->takeItem(idx);
     notes.erase(notes.begin() + idx);
-    ui->notePaint->clearImage();
 }
 
 void MainWindow::on_notePaint_clicked()
 {
     int idx = ui->noteList->currentRow();
-    if (idx != -1) {
+    if (idx != -1)
+    {
         Note &toChange = notes[idx];
         toChange.points = ui->notePaint->points;
     }
@@ -134,7 +159,8 @@ void MainWindow::on_notePaint_clicked()
 void MainWindow::on_actionColor_triggered()
 {
     QColor color = QColorDialog::getColor(ui->notePaint->penColor, this);
-    if (color.isValid()) {
+    if (color.isValid())
+    {
         ui->notePaint->penColor = color;
     }
 }

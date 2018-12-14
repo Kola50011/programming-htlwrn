@@ -15,26 +15,26 @@
 class PaintWidget : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     explicit PaintWidget(QWidget *parent = nullptr);
     void drawPoints(QVector<Point> _points);
     QVector<Point> points;
     QColor penColor = Qt::black;
 
-signals:
+  signals:
     void clicked();
 
-public slots:
+  public slots:
     void clearImage();
 
-protected:
+  protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
 
-private:
+  private:
     void resizeImage(QImage *image, const QSize &newSize);
 
     bool painting;

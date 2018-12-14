@@ -11,7 +11,8 @@
 #include <QRectF>
 #include <QColorDialog>
 
-namespace Ui {
+namespace Ui
+{
 class MainWindow;
 }
 
@@ -19,12 +20,12 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public:
+  public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void load();
 
-private slots:
+  private slots:
 
     void on_actionNew_triggered();
 
@@ -46,8 +47,8 @@ private slots:
 
     void on_actionErase_triggered();
 
-protected:
-    void paintEvent(QPaintEvent * event)
+  protected:
+    void paintEvent(QPaintEvent *event)
     {
         QMainWindow::paintEvent(event);
         QPainter p(this);
@@ -56,7 +57,7 @@ protected:
         p.drawRect(rectangle);
     }
 
-private:
+  private:
     Ui::MainWindow *ui;
     std::vector<Note> notes;
 

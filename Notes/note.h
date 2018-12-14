@@ -9,16 +9,16 @@
 
 class Note
 {
-public:
+  public:
     Note(QString _title, QString _text, QVector<Point> _points)
         : title{_title}, text{_text}, points{_points} {};
-    Note() {};
+    Note(){};
     QString title;
     QString text;
     QVector<Point> points;
 
-    friend QDataStream &operator <<(QDataStream &out, const Note &note);
-    friend QDataStream &operator >>(QDataStream &in, Note &note);
+    friend QDataStream &operator<<(QDataStream &out, const Note &note);
+    friend QDataStream &operator>>(QDataStream &in, Note &note);
 };
 
 #endif // NOTE_H
