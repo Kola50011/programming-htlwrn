@@ -1,3 +1,9 @@
+/*************************************************************************
+ * Name = Konstantin Lampalzer
+ * Class = 5BHIF
+ * Date = 14.12.18
+*************************************************************************/
+
 #include "point.h"
 
 Point::Point(QPoint _point, QColor _color) : point{_point}, color{_color}

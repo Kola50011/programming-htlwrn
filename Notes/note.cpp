@@ -1,3 +1,9 @@
+/*************************************************************************
+ * Name = Konstantin Lampalzer
+ * Class = 5BHIF
+ * Date = 14.12.18
+*************************************************************************/
+
 #include "note.h"
 QDataStream &operator<<(QDataStream &out, const Note &note)
 {
