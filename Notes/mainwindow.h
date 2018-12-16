@@ -58,9 +58,6 @@ class MainWindow : public QMainWindow
     {
         QMainWindow::paintEvent(event);
         QPainter p(this);
-
-        QRectF rectangle(10.0, 20.0, 80.0, 60.0);
-        p.drawRect(rectangle);
     }
 
   private:
