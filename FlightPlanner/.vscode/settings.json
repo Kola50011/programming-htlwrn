@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "vector": "cpp",
+        "optional": "cpp",
+        "system_error": "cpp",
+        "thread": "cpp",
+        "algorithm": "cpp",
+        "qapplication": "cpp"
+    }
+}
