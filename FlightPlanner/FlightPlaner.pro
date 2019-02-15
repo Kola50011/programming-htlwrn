@@ -53,3 +53,11 @@ DISTFILES += \
     static/AirlineRoutes.db \
     static/Earthmap.jpg \
     static/Latitude and Longitude of the Earth.png
+
+# remove possible other optimization flags
+QMAKE_CXXFLAGS_RELEASE -= -O
+QMAKE_CXXFLAGS_RELEASE -= -O1
+QMAKE_CXXFLAGS_RELEASE -= -O2
+
+# add the desired if not present
+QMAKE_CXXFLAGS_RELEASE *= -O2

@@ -10,11 +10,14 @@
 #include <route.h>
 #include <airport.h>
 #include <airline.h>
+#include <unordered_set>
 
 class DbManager
 {
   public:
     std::vector<std::vector<Route>> routes;
+    std::vector<std::map<int, bool>> connections;
+
     std::vector<Airport> airports;
     std::vector<Airline> airlines;
 
@@ -55,14 +58,44 @@ class DbManager
                 return airport.id;
             }
         }
-        return 0;
+        return -1;
+    }
+
+    int getAirlineId(QString name)
+    {
+        for (auto &airline : airlines)
+        {
+            if (airline.name == name && airline.name != "")
+            {
+                return airline.id;
+            }
+        }
+        return -1;
     }
 
     bool isConnected(int id1, int id2)
     {
+        if (connections[id1][id2] == true) {
+            return true;
+        }
+        return false;
+    }
+
+    bool isConnected(int id1, int id2, int airline) {
         for (auto &route : routes[id1])
         {
-            if (route.end == id2)
+            if (route.end == id2 && route.airline == airline)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool isConnectedViaAlliance(int id1, int id2, int alliance) {
+        for (auto &route : routes[id1])
+        {
+            if (route.end == id2 && airlines[route.airline].alliance == alliance)
             {
                 return true;
             }
@@ -77,13 +110,15 @@ class DbManager
 
     std::vector<int> getNeighbours(int id)
     {
+        std::unordered_set<int> set;
         std::vector<int> results;
+
         for (auto &route : routes[id])
         {
-            if (std::find(results.begin(), results.end(), route.end) == results.end()) {
-               results.push_back(route.end);
-            }
+            set.insert(route.end);
         }
+        results.assign( set.begin(), set.end() );
+
         return results;
     }
 
@@ -112,6 +147,8 @@ class DbManager
     void loadRoutes()
     {
         routes.resize(getAirportCount());
+        connections.resize(getAirportCount());
+
         QSqlQuery query;
         query.prepare("select * from route order by airport1");
         query.exec();
@@ -123,7 +160,9 @@ class DbManager
         while (query.next())
         {
             int a1{query.value(a1Col).toInt()};
-            routes[a1].push_back(Route(a1, query.value(a2Col).toInt(), query.value(airlineCol).toInt()));
+            int a2{query.value(a2Col).toInt()};
+            routes[a1].push_back(Route(a1, a2, query.value(airlineCol).toInt()));
+            connections[a1][a2] = true;
         }
     }
 

@@ -36,25 +36,21 @@ std::tuple<double, double> DrawableMapWidget::latLonToImg(std::tuple<double, dou
     return latLonToImg(std::get<1>(inp), std::get<2>(inp));
 }
 
-void DrawableMapWidget::connectTheDots(std::vector<std::vector<int>> routes)
+void DrawableMapWidget::connectTheDots(std::vector<tuple<int, int>> routes, QColor color)
 {
-    resetPic();
     auto airports = DbManager::getInstance().airports;
     QPainter painter{&pic};
-    painter.setPen(QPen{QBrush{QColor{82, 82, 255}}, 3});
+    painter.setPen(QPen{QBrush{color}, 3});
 
     for (auto route : routes)
     {
-        for (size_t i{1}; i < route.size(); i++)
-        {
-            auto fromTuple = latLonToImg(airports[route[i - 1]].latitude, airports[route[i - 1]].longitude);
-            auto toTuple = latLonToImg(airports[route[i]].latitude, airports[route[i]].longitude);
+        auto fromTuple = latLonToImg(airports[std::get<0>(route)].latitude, airports[std::get<0>(route)].longitude);
+        auto toTuple = latLonToImg(airports[std::get<1>(route)].latitude, airports[std::get<1>(route)].longitude);
 
-            QPoint from{int(std::round(std::get<1>(fromTuple))), int(std::round(std::get<0>(fromTuple)))};
-            QPoint to{(int(std::round(std::get<1>(toTuple)))), int(std::round(std::get<0>(toTuple)))};
+        QPoint from{int(std::round(std::get<1>(fromTuple))), int(std::round(std::get<0>(fromTuple)))};
+        QPoint to{(int(std::round(std::get<1>(toTuple)))), int(std::round(std::get<0>(toTuple)))};
 
-            painter.drawLine(from, to);
-        }
+        painter.drawLine(from, to);
     }
 
     update();

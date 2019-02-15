@@ -21,7 +21,7 @@ class DrawableMapWidget : public QWidget
     std::tuple<double, double> latLonToImg(double lat, double lon);
     std::tuple<double, double> latLonToImg(std::tuple<double, double, double> inp);
 
-    void connectTheDots(std::vector<std::vector<int>> routes);
+    void connectTheDots(std::vector<std::tuple<int, int>> routes, QColor color);
 
   signals:
 

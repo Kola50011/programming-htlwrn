@@ -22,7 +22,7 @@ class MainWindow : public QMainWindow
 
   public:
     explicit MainWindow(QWidget *parent = nullptr);
-    void initComboBoxen();
+    void initGUI();
     ~MainWindow();
 
   private slots:
@@ -36,6 +36,8 @@ class MainWindow : public QMainWindow
     QFont standardFont{"Helvetica", 18};
 
     vector<vector<int>> getRoutes(vector<int> prev, int depth, int start, int end);
+    vector<vector<int>> removeWrongAirlines(vector<vector<int>> routes, int airline);
+    std::tuple<vector<tuple<int, int>>, vector<tuple<int, int>>, vector<tuple<int, int>>> splitRoutes(vector<vector<int>> routes, int airline);
 };
 
 #endif // MAINWINDOW_H
