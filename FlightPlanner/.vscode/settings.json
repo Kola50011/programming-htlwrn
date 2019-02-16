@@ -5,6 +5,7 @@
         "system_error": "cpp",
         "thread": "cpp",
         "algorithm": "cpp",
-        "qapplication": "cpp"
+        "qapplication": "cpp",
+        "qtablewidgetitem": "cpp"
     }
 }

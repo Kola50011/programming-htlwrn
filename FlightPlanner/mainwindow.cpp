@@ -68,11 +68,15 @@ vector<vector<int>> MainWindow::getRoutes(vector<int> prev, int depth, int start
             vector<int> newPrev = prev;
             newPrev.push_back(airport);
 
-            if (depth == 4) {
+            if (depth == 4)
+            {
                 futs.push_back(std::async(launch::async, &MainWindow::getRoutes, this, newPrev, depth - 1, airport, end));
-            } else {
+            }
+            else
+            {
                 auto toConcat = getRoutes(newPrev, depth - 1, airport, end);
-                if (toConcat.size() != 0) {
+                if (toConcat.size() != 0)
+                {
                     ret.insert(ret.end(), toConcat.begin(), toConcat.end());
                 }
             }
@@ -103,8 +107,8 @@ void MainWindow::on_pushButton_clicked()
     int airport2 = database.getAirportId(destination);
     int airlineId = database.getAirlineId(airline);
 
-    //airport1 = 4908;
-    //airport2 = 1399;
+    //airport1 = 4908; // Vienna
+    //airport2 = 3699; // Palm Spings
 
     int depth{0};
     vector<vector<int>> routes;
@@ -113,50 +117,63 @@ void MainWindow::on_pushButton_clicked()
         auto start = std::chrono::high_resolution_clock::now();
         routes = getRoutes({airport1}, depth, airport1, airport2);
         auto finish = std::chrono::high_resolution_clock::now();
-        auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(finish-start);
+        auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(finish - start);
 
         qDebug() << depth;
         qDebug() << microseconds.count() * 0.001;
         depth += 1;
+    } while (routes.size() == 0 && depth <= 4);
 
-
-
-        for (auto &vec : routes)
+    vector<QString> flights;
+    for (auto &vec : routes)
+    {
+        QString flight;
+        for (int i{0}; i <= vec.size() - 1; i++)
         {
-            QString flight;
-            for (int i{0}; i <= vec.size() - 1; i++)
+            if (i != 0)
             {
-                if (i != 0)
-                {
-                    flight += " -> ";
-                }
-                QString airportName = database.getAirportName(vec[i]);
-                airportName = airportName.simplified();
-                flight += airportName;
+                flight += " -> ";
             }
-            ui->flighttable->addItem(new QListWidgetItem(flight));
+            QString airportName = database.getAirportName(vec[i]);
+            flight += airportName;
         }
-    } while (routes.size() == 0 && depth <= 10);
+        flights.push_back(flight);
+    }
+    sort(flights.begin(), flights.end());
+    for (auto &flight : flights)
+    {
+        ui->flighttable->addItem(new QListWidgetItem(flight));
+    }
 
     auto newRoutes = splitRoutes(routes, airlineId);
-
-    ui->map->connectTheDots(get<0>(newRoutes), QColor{255, 82, 82});
-    ui->map->connectTheDots(get<1>(newRoutes), QColor{82, 82, 255});
-    ui->map->connectTheDots(get<2>(newRoutes), QColor{82, 82, 82});
+    if (airlineId == -1)
+    {
+        ui->map->connectTheDots(get<2>(newRoutes), QColor{82, 82, 255});
+    }
+    else
+    {
+        ui->map->connectTheDots(get<0>(newRoutes), QColor{255, 82, 82});
+        ui->map->connectTheDots(get<1>(newRoutes), QColor{82, 82, 255});
+        ui->map->connectTheDots(get<2>(newRoutes), QColor{82, 82, 82});
+    }
 }
 
 vector<vector<int>> MainWindow::removeWrongAirlines(vector<vector<int>> routes, int airline)
 {
     vector<vector<int>> ret;
-    for (auto &route : routes) {
+    for (auto &route : routes)
+    {
         bool append{true};
-        for (int i{0}; i <= route.size() - 2; i++) {
-            if (!database.isConnected(route[i], route[i - 1], airline)) {
+        for (int i{0}; i <= route.size() - 2; i++)
+        {
+            if (!database.isConnected(route[i], route[i - 1], airline))
+            {
                 append = false;
                 break;
             }
         }
-        if (append) {
+        if (append)
+        {
             ret.push_back(route);
         }
     }
@@ -171,18 +188,24 @@ std::tuple<vector<tuple<int, int>>, vector<tuple<int, int>>, vector<tuple<int, i
 
     int alliance = database.airlines[airline].alliance;
 
-    for (auto &route : routes) {
-        for (int i{0}; i <= route.size() - 2; i++) {
-            if (database.isConnected(route[i], route[i + 1], airline)) {
+    for (auto &route : routes)
+    {
+        for (int i{0}; i <= route.size() - 2; i++)
+        {
+            if (database.isConnected(route[i], route[i + 1], airline))
+            {
                 airlineRoutes.push_back(make_tuple(route[i], route[i + 1]));
-            } else if (database.isConnectedViaAlliance(route[i], route[i + 1], alliance)) {
+            }
+            else if (database.isConnectedViaAlliance(route[i], route[i + 1], alliance))
+            {
                 allianceRoutes.push_back(make_tuple(route[i], route[i + 1]));
-            } else {
+            }
+            else
+            {
                 otherRoutes.push_back(make_tuple(route[i], route[i + 1]));
             }
         }
     }
-
 
     return std::make_tuple(airlineRoutes, allianceRoutes, otherRoutes);
 }

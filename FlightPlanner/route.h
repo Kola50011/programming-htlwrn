@@ -1,3 +1,9 @@
+/*
+ * Author: Lampalzer Konstantin
+ * Class: 5BHIF
+ * Date: 16.02.2019
+ */
+
 #ifndef ROUTE_H
 #define ROUTE_H
 
@@ -5,18 +11,18 @@
 
 class Route
 {
-  public:
-    int start;
-    int end;
-    int airline;
+public:
+  int start;
+  int end;
+  int airline;
 
-    Route(int _start, int _end, int _airline)
-    {
-        start = _start;
-        end = _end;
-        airline = _airline;
-    }
+  Route(int _start, int _end, int _airline)
+  {
+    start = _start;
+    end = _end;
+    airline = _airline;
+  }
 
-    Route() {}
+  Route() {}
 };
 #endif // ROUTE_H

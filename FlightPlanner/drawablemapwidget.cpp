@@ -1,7 +1,7 @@
 /*
- * Author: KÃ¶nigsreiter Simon, Klimont Joel, Lampalzer Alexander, Glavanits Marcel
+ * Author: Lampalzer Konstantin
  * Class: 5BHIF
- * Date: 14.02.2019
+ * Date: 16.02.2019
  */
 
 #include "drawablemapwidget.h"
@@ -26,31 +26,74 @@ void DrawableMapWidget::paintEvent(QPaintEvent *)
     painter.drawPixmap(0, 0, pic);
 }
 
-std::tuple<double, double> DrawableMapWidget::latLonToImg(double lat, double lon)
+QPoint DrawableMapWidget::airportToImg(Airport airport)
 {
-    return std::make_tuple<double, double>((lat - 90.0) * -4.0, (lon + 180.0) * 4.0);
+    return latLonToPoint(airport.latitude, airport.longitude);
 }
 
-std::tuple<double, double> DrawableMapWidget::latLonToImg(std::tuple<double, double, double> inp)
+QPoint DrawableMapWidget::latLonToPoint(double lat, double lon)
 {
-    return latLonToImg(std::get<1>(inp), std::get<2>(inp));
+    return QPoint((lon + 180.0) * 4.0,
+                  (lat - 90.0) * -4.0);
+}
+void DrawableMapWidget::connectAirports(Airport from, Airport to, QColor color, QPainter &painter)
+{
+    auto fromPoint = airportToImg(from);
+    auto toPoint = airportToImg(to);
+
+    auto directDistance = abs(from.longitude - to.longitude);
+    auto roundDistance = 360 - directDistance;
+
+    if (directDistance < roundDistance)
+    {
+        painter.setPen(QPen{QBrush{color}, 1});
+        painter.drawLine(fromPoint, toPoint);
+    }
+    else
+    {
+        painter.setPen(QPen{QBrush{color}, 1});
+
+        auto leftSide = latLonToPoint((from.latitude + to.latitude) / 2, -180.0);
+        auto rightSide = latLonToPoint((from.latitude + to.latitude) / 2, 180.0);
+
+        if (from.longitude > 0)
+        {
+            painter.drawLine(fromPoint, rightSide);
+            painter.drawLine(leftSide, toPoint);
+        }
+        else
+        {
+            painter.drawLine(fromPoint, leftSide);
+            painter.drawLine(rightSide, toPoint);
+        }
+    }
 }
 
 void DrawableMapWidget::connectTheDots(std::vector<tuple<int, int>> routes, QColor color)
 {
     auto airports = DbManager::getInstance().airports;
     QPainter painter{&pic};
-    painter.setPen(QPen{QBrush{color}, 3});
+
+    // Need to go twice, as lines would be over text
+    for (auto route : routes)
+    {
+        auto fromAirport = airports[std::get<0>(route)];
+        auto toAirport = airports[std::get<1>(route)];
+
+        connectAirports(fromAirport, toAirport, color, painter);
+    }
 
     for (auto route : routes)
     {
-        auto fromTuple = latLonToImg(airports[std::get<0>(route)].latitude, airports[std::get<0>(route)].longitude);
-        auto toTuple = latLonToImg(airports[std::get<1>(route)].latitude, airports[std::get<1>(route)].longitude);
+        auto fromAirport = airports[std::get<0>(route)];
+        auto toAirport = airports[std::get<1>(route)];
 
-        QPoint from{int(std::round(std::get<1>(fromTuple))), int(std::round(std::get<0>(fromTuple)))};
-        QPoint to{(int(std::round(std::get<1>(toTuple)))), int(std::round(std::get<0>(toTuple)))};
+        auto fromPoint = airportToImg(fromAirport);
+        auto toPoint = airportToImg(toAirport);
 
-        painter.drawLine(from, to);
+        painter.setPen(QPen{QBrush{QColor{0, 0, 0}}, 6});
+        painter.drawText(fromPoint, fromAirport.iata);
+        painter.drawText(toPoint, toAirport.iata);
     }
 
     update();
@@ -66,14 +109,9 @@ void DrawableMapWidget::resetPic()
 
     painter.setPen(QPen{QBrush{QColor{0, 255, 0, 200}}, 3});
 
-    auto airports = DbManager::getInstance().airports;
-    for (auto airport : airports)
+    for (auto airport : DbManager::getInstance().airports)
     {
-        auto imgCoord = latLonToImg(airport.latitude, airport.longitude);
-        int lat = int(std::round(std::get<0>(imgCoord)));
-        int lon = int(std::round(std::get<1>(imgCoord)));
-
-        painter.drawPoint(QPoint{lon, lat});
+        painter.drawPoint(airportToImg(airport));
     }
 
     pic = l_pic;

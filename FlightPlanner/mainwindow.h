@@ -1,3 +1,9 @@
+/*
+ * Author: Lampalzer Konstantin
+ * Class: 5BHIF
+ * Date: 16.02.2019
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -18,26 +24,26 @@ class MainWindow;
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
-  public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    void initGUI();
-    ~MainWindow();
+public:
+  explicit MainWindow(QWidget *parent = nullptr);
+  void initGUI();
+  ~MainWindow();
 
-  private slots:
-    void on_pushButton_clicked();
+private slots:
+  void on_pushButton_clicked();
 
-  private:
-    Ui::MainWindow *ui;
-    DbManager database = DbManager::getInstance();
+private:
+  Ui::MainWindow *ui;
+  DbManager database = DbManager::getInstance();
 
-    QFont titleFont{"Helvetica", 18, QFont::Bold};
-    QFont standardFont{"Helvetica", 18};
+  QFont titleFont{"Helvetica", 18, QFont::Bold};
+  QFont standardFont{"Helvetica", 18};
 
-    vector<vector<int>> getRoutes(vector<int> prev, int depth, int start, int end);
-    vector<vector<int>> removeWrongAirlines(vector<vector<int>> routes, int airline);
-    std::tuple<vector<tuple<int, int>>, vector<tuple<int, int>>, vector<tuple<int, int>>> splitRoutes(vector<vector<int>> routes, int airline);
+  vector<vector<int>> getRoutes(vector<int> prev, int depth, int start, int end);
+  vector<vector<int>> removeWrongAirlines(vector<vector<int>> routes, int airline);
+  std::tuple<vector<tuple<int, int>>, vector<tuple<int, int>>, vector<tuple<int, int>>> splitRoutes(vector<vector<int>> routes, int airline);
 };
 
 #endif // MAINWINDOW_H

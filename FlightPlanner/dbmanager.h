@@ -1,3 +1,9 @@
+/*
+ * Author: Lampalzer Konstantin
+ * Class: 5BHIF
+ * Date: 16.02.2019
+ */
+
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
 
@@ -75,13 +81,15 @@ class DbManager
 
     bool isConnected(int id1, int id2)
     {
-        if (connections[id1][id2] == true) {
+        if (connections[id1][id2] == true)
+        {
             return true;
         }
         return false;
     }
 
-    bool isConnected(int id1, int id2, int airline) {
+    bool isConnected(int id1, int id2, int airline)
+    {
         for (auto &route : routes[id1])
         {
             if (route.end == id2 && route.airline == airline)
@@ -92,7 +100,8 @@ class DbManager
         return false;
     }
 
-    bool isConnectedViaAlliance(int id1, int id2, int alliance) {
+    bool isConnectedViaAlliance(int id1, int id2, int alliance)
+    {
         for (auto &route : routes[id1])
         {
             if (route.end == id2 && airlines[route.airline].alliance == alliance)
@@ -117,7 +126,7 @@ class DbManager
         {
             set.insert(route.end);
         }
-        results.assign( set.begin(), set.end() );
+        results.assign(set.begin(), set.end());
 
         return results;
     }
@@ -184,7 +193,7 @@ class DbManager
             auto id{query.value(idCol).toInt()};
             airports.at(id) = Airport(id,
                                       query.value(latitudeCol).toDouble(), query.value(longitudeCol).toDouble(),
-                                      query.value(nameCol).toString(), query.value(iataCol).toString());
+                                      query.value(nameCol).toString().simplified(), query.value(iataCol).toString());
         }
     }
 

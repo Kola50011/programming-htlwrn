@@ -1,7 +1,7 @@
 /*
- * Author: KÃ¶nigsreiter Simon, Klimont Joel, Lampalzer Alexander, Glavanits Marcel
+ * Author: Lampalzer Konstantin
  * Class: 5BHIF
- * Date: 14.02.2019
+ * Date: 16.02.2019
  */
 
 #ifndef DRAWABLEMAPWIDGET_H
@@ -10,27 +10,28 @@
 #include <QWidget>
 #include "dbmanager.h"
 #include <QApplication>
+#include <QPoint>
 
 class DrawableMapWidget : public QWidget
 {
-    Q_OBJECT
-  public:
-    explicit DrawableMapWidget(QWidget *parent = nullptr);
+  Q_OBJECT
+public:
+  explicit DrawableMapWidget(QWidget *parent = nullptr);
 
-    void paintEvent(QPaintEvent *e);
-    std::tuple<double, double> latLonToImg(double lat, double lon);
-    std::tuple<double, double> latLonToImg(std::tuple<double, double, double> inp);
+  void paintEvent(QPaintEvent *e);
+  QPoint airportToImg(Airport airport);
+  QPoint latLonToPoint(double lat, double lon);
 
-    void connectTheDots(std::vector<std::tuple<int, int>> routes, QColor color);
+  void connectAirports(Airport from, Airport to, QColor color, QPainter &painter);
+  void connectTheDots(std::vector<std::tuple<int, int>> routes, QColor color);
 
-  signals:
+  void resetPic();
+signals:
 
-  public slots:
+public slots:
 
-  private:
-    QPixmap pic;
-
-    void resetPic();
+private:
+  QPixmap pic;
 };
 
 #endif // DRAWABLEMAPWIDGET_H
