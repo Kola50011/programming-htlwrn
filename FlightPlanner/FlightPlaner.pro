@@ -61,3 +61,11 @@ QMAKE_CXXFLAGS_RELEASE -= -O2
 
 # add the desired if not present
 QMAKE_CXXFLAGS_RELEASE *= -O2
+
+# Copy DB File to executable
+
+copydata.commands = $(COPY_DIR) $$PWD/static/AirlineRoutes.db $$OUT_PWD
+first.depends = $(first) copydata
+export(first.depends)
+export(copydata.commands)
+QMAKE_EXTRA_TARGETS += first copydata

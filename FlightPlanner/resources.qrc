@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/new/prefix1">
+    <qresource prefix="/static">
         <file>static/Earthmap.jpg</file>
         <file>static/AirlineRoutes.db</file>
         <file>static/Latitude and Longitude of the Earth.png</file>
