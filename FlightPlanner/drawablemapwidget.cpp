@@ -103,7 +103,7 @@ void DrawableMapWidget::resetPic()
 {
     QPixmap l_pic{1440, 720};
     QPainter painter(&l_pic);
-    QPixmap map("/home/koka/workspace/programming-htlwrn/FlightPlanner/static/Earthmap.jpg");
+    QPixmap map(":/static/static/Earthmap.jpg");
     map = map.scaled(1440, 720, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
     painter.drawPixmap(0, 0, map);
 

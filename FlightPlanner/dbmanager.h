@@ -137,7 +137,7 @@ class DbManager
     DbManager()
     {
         m_db = QSqlDatabase::addDatabase("QSQLITE");
-        m_db.setDatabaseName("/home/koka/workspace/programming-htlwrn/FlightPlanner/static/AirlineRoutes.db");
+        m_db.setDatabaseName("./AirlineRoutes.db");
 
         if (!m_db.open())
         {

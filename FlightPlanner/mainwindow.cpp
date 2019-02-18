@@ -124,6 +124,8 @@ void MainWindow::on_pushButton_clicked()
         depth += 1;
     } while (routes.size() == 0 && depth <= 4);
 
+    // Fill flight table
+
     vector<QString> flights;
     for (auto &vec : routes)
     {
@@ -145,6 +147,8 @@ void MainWindow::on_pushButton_clicked()
         ui->flighttable->addItem(new QListWidgetItem(flight));
     }
 
+
+
     auto newRoutes = splitRoutes(routes, airlineId);
     if (airlineId == -1)
     {
@@ -156,28 +160,6 @@ void MainWindow::on_pushButton_clicked()
         ui->map->connectTheDots(get<1>(newRoutes), QColor{82, 82, 255});
         ui->map->connectTheDots(get<2>(newRoutes), QColor{82, 82, 82});
     }
-}
-
-vector<vector<int>> MainWindow::removeWrongAirlines(vector<vector<int>> routes, int airline)
-{
-    vector<vector<int>> ret;
-    for (auto &route : routes)
-    {
-        bool append{true};
-        for (int i{0}; i <= route.size() - 2; i++)
-        {
-            if (!database.isConnected(route[i], route[i - 1], airline))
-            {
-                append = false;
-                break;
-            }
-        }
-        if (append)
-        {
-            ret.push_back(route);
-        }
-    }
-    return ret;
 }
 
 std::tuple<vector<tuple<int, int>>, vector<tuple<int, int>>, vector<tuple<int, int>>> MainWindow::splitRoutes(vector<vector<int>> routes, int airline)
