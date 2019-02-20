@@ -4,6 +4,8 @@
 #include <future>
 #include <QCompleter>
 #include <chrono>
+#include "customsearchalgorithm.h"
+#include "breadthfirstsearchalgorithm.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
                                           ui(new Ui::MainWindow)
@@ -40,92 +42,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-vector<vector<int>> MainWindow::getRoutes(vector<int> prev, int depth, int start, int end)
+void MainWindow::fillFlightTable(vector<vector<int>> routes)
 {
-    vector<vector<int>> ret;
-
-    if (depth == 0)
-    {
-        if (database.isConnected(start, end))
-        {
-            vector<int> newPrev = prev;
-            newPrev.push_back(end);
-            ret.push_back(newPrev);
-        }
-    }
-    else
-    {
-        auto nbs = database.getNeighbours(start);
-        vector<future<vector<vector<int>>>> futs;
-
-        for (auto &airport : nbs)
-        {
-            if (std::find(prev.begin(), prev.end(), airport) != prev.end())
-            {
-                continue;
-            }
-
-            vector<int> newPrev = prev;
-            newPrev.push_back(airport);
-
-            if (depth == 4)
-            {
-                futs.push_back(std::async(launch::async, &MainWindow::getRoutes, this, newPrev, depth - 1, airport, end));
-            }
-            else
-            {
-                auto toConcat = getRoutes(newPrev, depth - 1, airport, end);
-                if (toConcat.size() != 0)
-                {
-                    ret.insert(ret.end(), toConcat.begin(), toConcat.end());
-                }
-            }
-        }
-
-        for (auto &fut : futs)
-        {
-            auto toConcat = fut.get();
-            ret.insert(ret.end(), toConcat.begin(), toConcat.end());
-        }
-    }
-    return ret;
-}
-
-void MainWindow::on_pushButton_clicked()
-{
-    ui->flighttable->clear();
-    ui->map->resetPic();
-
-    QString departure = ui->FromSearch->text();
-    QString destination = ui->ToSearch->text();
-    QString airline = ui->AirlineSearch->text();
-
-    departure = departure.left(departure.indexOf("(") - 1);
-    destination = destination.left(destination.indexOf("(") - 1);
-
-    int airport1 = database.getAirportId(departure);
-    int airport2 = database.getAirportId(destination);
-    int airlineId = database.getAirlineId(airline);
-
-    //airport1 = 4908; // Vienna
-    //airport2 = 3699; // Palm Spings
-
-    int depth{0};
-    vector<vector<int>> routes;
-    do
-    {
-        auto start = std::chrono::high_resolution_clock::now();
-        routes = getRoutes({airport1}, depth, airport1, airport2);
-        auto finish = std::chrono::high_resolution_clock::now();
-        auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(finish - start);
-
-        qDebug() << depth;
-        qDebug() << microseconds.count() * 0.001;
-        depth += 1;
-    } while (routes.size() == 0 && depth <= 4);
-
-    // Fill flight table
-
     vector<QString> flights;
     for (auto &vec : routes)
     {
@@ -146,7 +64,35 @@ void MainWindow::on_pushButton_clicked()
     {
         ui->flighttable->addItem(new QListWidgetItem(flight));
     }
+}
 
+void MainWindow::on_pushButton_clicked()
+{
+    ui->flighttable->clear();
+    ui->map->resetPic();
+
+    QString departure = ui->FromSearch->text();
+    QString destination = ui->ToSearch->text();
+    QString airline = ui->AirlineSearch->text();
+
+    departure = departure.left(departure.indexOf("(") - 1);
+    destination = destination.left(destination.indexOf("(") - 1);
+
+    int airport1 = database.getAirportId(departure);
+    int airport2 = database.getAirportId(destination);
+    int airlineId = database.getAirlineId(airline);
+
+    airport1 = 4908; // Vienna
+    airport2 = 3699; // Palm Spings
+
+    BreadthFirstSearchAlgorithm customSearchAlgorithm;
+
+    auto start = std::chrono::high_resolution_clock::now();
+    vector<vector<int>> routes = customSearchAlgorithm.getRoutes(airport1, airport2);
+    auto finish = std::chrono::high_resolution_clock::now();
+    auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(finish - start);
+
+    fillFlightTable(routes);
 
 
     auto newRoutes = splitRoutes(routes, airlineId);

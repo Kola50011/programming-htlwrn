@@ -41,8 +41,7 @@ private:
   QFont titleFont{"Helvetica", 18, QFont::Bold};
   QFont standardFont{"Helvetica", 18};
 
-  vector<vector<int>> getRoutes(vector<int> prev, int depth, int start, int end);
-  vector<vector<int>> removeWrongAirlines(vector<vector<int>> routes, int airline);
+  void fillFlightTable(vector<vector<int>> routes);
   std::tuple<vector<tuple<int, int>>, vector<tuple<int, int>>, vector<tuple<int, int>>> splitRoutes(vector<vector<int>> routes, int airline);
 };
 

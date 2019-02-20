@@ -36,7 +36,11 @@ HEADERS += \
     route.h \
     drawablemapwidget.h \
     airport.h \
-    airline.h
+    airline.h \
+    searchalgorithm.h \
+    customsearchalgorithm.h \
+    dijkstrasearchalgorithm.h \
+    breadthfirstsearchalgorithm.h
 
 FORMS += \
         mainwindow.ui
