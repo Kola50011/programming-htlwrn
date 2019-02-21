@@ -131,6 +131,17 @@ class DbManager
         return results;
     }
 
+    void addRoute(int startAirport, int endAirport, int airline)
+    {
+        routes[startAirport].push_back(Route(startAirport, endAirport, airline));
+        connections[startAirport][endAirport] = true;
+
+        //QSqlQuery query;
+        //query.prepare("insert into routes values (?, ?, ?)");
+        //query.bindValue(startAirport, endAirport, airline);
+        //query.exec();
+    }
+
   private:
     QSqlDatabase m_db;
 

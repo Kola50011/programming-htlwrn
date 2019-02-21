@@ -6,6 +6,7 @@
         "thread": "cpp",
         "algorithm": "cpp",
         "qapplication": "cpp",
-        "qtablewidgetitem": "cpp"
+        "qtablewidgetitem": "cpp",
+        "qcompleter": "cpp"
     }
 }

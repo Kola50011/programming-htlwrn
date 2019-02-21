@@ -1,3 +1,9 @@
+/*
+ * Author: Lampalzer Konstantin
+ * Class: 5BHIF
+ * Date: 16.02.2019
+ */
+
 #ifndef CUSTOMSEARCHALGORITHM_H
 #define CUSTOMSEARCHALGORITHM_H
 
@@ -6,8 +12,8 @@
 
 class CustomSearchAlgorithm : public SearchAlgorithm
 {
-public:
-    CustomSearchAlgorithm() {};
+  public:
+    CustomSearchAlgorithm(){};
 
     std::vector<std::vector<int>> getRoutes(int start, int end)
     {
@@ -22,7 +28,7 @@ public:
         return routes;
     }
 
-private:
+  private:
     std::vector<std::vector<int>> getRoutesInternal(std::vector<int> prev, int depth, int start, int end)
     {
         std::vector<std::vector<int>> ret;

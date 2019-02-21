@@ -1,3 +1,9 @@
+/*
+ * Author: Lampalzer Konstantin
+ * Class: 5BHIF
+ * Date: 16.02.2019
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <vector>
@@ -71,9 +77,9 @@ void MainWindow::on_pushButton_clicked()
     ui->flighttable->clear();
     ui->map->resetPic();
 
-    QString departure = ui->FromSearch->text();
-    QString destination = ui->ToSearch->text();
-    QString airline = ui->AirlineSearch->text();
+    QString departure = ui->FromSearch->text().simplified();
+    QString destination = ui->ToSearch->text().simplified();
+    QString airline = ui->AirlineSearch->text().simplified();
 
     departure = departure.left(departure.indexOf("(") - 1);
     destination = destination.left(destination.indexOf("(") - 1);
@@ -82,18 +88,22 @@ void MainWindow::on_pushButton_clicked()
     int airport2 = database.getAirportId(destination);
     int airlineId = database.getAirlineId(airline);
 
-    airport1 = 4908; // Vienna
-    airport2 = 3699; // Palm Spings
+    if (airport1 == 0 || airport2 == 0)
+    {
+        qDebug() << "Using debug mode";
+        airport1 = 4908; // Vienna
+        airport2 = 3699; // Palm Spings
+    }
 
-    BreadthFirstSearchAlgorithm customSearchAlgorithm;
+    BreadthFirstSearchAlgorithm searchAlgorithm;
 
     auto start = std::chrono::high_resolution_clock::now();
-    vector<vector<int>> routes = customSearchAlgorithm.getRoutes(airport1, airport2);
+    vector<vector<int>> routes = searchAlgorithm.getRoutes(airport1, airport2);
     auto finish = std::chrono::high_resolution_clock::now();
     auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(finish - start);
 
+    qDebug() << "TIME: " << microseconds.count() * 0.001;
     fillFlightTable(routes);
-
 
     auto newRoutes = splitRoutes(routes, airlineId);
     if (airlineId == -1)
@@ -136,4 +146,17 @@ std::tuple<vector<tuple<int, int>>, vector<tuple<int, int>>, vector<tuple<int, i
     }
 
     return std::make_tuple(airlineRoutes, allianceRoutes, otherRoutes);
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QMessageBox qMessageBox;
+    qMessageBox.setText("<h3>Name:</h3> Konstantin Lampalzer<br>"
+                        "<h3>Klasse:</h3> 5BHIF");
+    qMessageBox.exec();
+}
+
+void MainWindow::on_actionAdd_Route_triggered()
+{
+    addRouteDialog.show();
 }

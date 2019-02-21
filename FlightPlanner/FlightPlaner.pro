@@ -28,7 +28,8 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    drawablemapwidget.cpp
+    drawablemapwidget.cpp \
+    addroutedialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,11 +41,14 @@ HEADERS += \
     searchalgorithm.h \
     customsearchalgorithm.h \
     dijkstrasearchalgorithm.h \
-    breadthfirstsearchalgorithm.h
+    breadthfirstsearchalgorithm.h \
+    addroutedialog.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    addroutedialog.ui
 
+# Macher: i14086
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -67,6 +71,7 @@ QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE *= -O2
 
 # Copy DB File to executable
+# Ersteller: Koka
 
 copydata.commands = $(COPY_DIR) $$PWD/static/AirlineRoutes.db $$OUT_PWD
 first.depends = $(first) copydata
