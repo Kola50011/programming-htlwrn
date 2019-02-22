@@ -182,7 +182,6 @@ void MainWindow::on_multiSearchButton_clicked()
             return;
         }
         airports.push_back(airportId);
-        qDebug() << airportId;
     }
 
     BreadthFirstSearchAlgorithm searchAlgorithm;

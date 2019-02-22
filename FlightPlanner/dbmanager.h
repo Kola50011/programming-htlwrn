@@ -57,14 +57,21 @@ class DbManager
 
     int getAirportId(QString name)
     {
+        std::vector<int> possibleAirports;
         for (auto &airport : airports)
         {
-            if (airport.name == name || airport.iata == name)
+            if (airport.name.contains(name) || airport.iata.contains(name))
             {
-                return airport.id;
+                possibleAirports.push_back();
             }
         }
-        return -1;
+
+        if (possibleAirports.size() != 1)
+        {
+            return -1;
+        } else {
+            return possibleAirports[0].id;
+        }
     }
 
     int getAirlineId(QString name)
