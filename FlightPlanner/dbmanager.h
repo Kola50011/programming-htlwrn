@@ -59,7 +59,7 @@ class DbManager
     {
         for (auto &airport : airports)
         {
-            if (airport.name == name)
+            if (airport.name == name || airport.iata == name)
             {
                 return airport.id;
             }

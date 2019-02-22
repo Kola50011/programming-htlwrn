@@ -48,7 +48,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::fillFlightTable(vector<vector<int>> routes)
+void MainWindow::fillFlightTable(vector<vector<int>> routes, bool sort)
 {
     vector<QString> flights;
     for (auto &vec : routes)
@@ -65,7 +65,10 @@ void MainWindow::fillFlightTable(vector<vector<int>> routes)
         }
         flights.push_back(flight);
     }
-    sort(flights.begin(), flights.end());
+    if (sort) {
+        std::sort(flights.begin(), flights.end());
+    }
+
     for (auto &flight : flights)
     {
         ui->flighttable->addItem(new QListWidgetItem(flight));
@@ -103,7 +106,7 @@ void MainWindow::on_pushButton_clicked()
     auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(finish - start);
 
     qDebug() << "TIME: " << microseconds.count() * 0.001;
-    fillFlightTable(routes);
+    fillFlightTable(routes, true);
 
     auto newRoutes = splitRoutes(routes, airlineId);
     if (airlineId == -1)
@@ -159,4 +162,52 @@ void MainWindow::on_actionAbout_triggered()
 void MainWindow::on_actionAdd_Route_triggered()
 {
     addRouteDialog.show();
+}
+
+void MainWindow::on_multiSearchButton_clicked()
+{
+    QStringList airportNames = ui->multiSearch->text().split(';');
+    QString airline = ui->AirlineSearch->text().simplified();
+    int airlineId = database.getAirlineId(airline);
+
+    vector<int> airports;
+    for (QString airport : airportNames)
+    {
+        airport = airport.simplified();
+        int airportId = database.getAirportId(airport);
+        if (airportId == 0 || airportId == -1)
+        {
+            // TODO Add alert!
+            qDebug() << "Error in aiport " << airport;
+            return;
+        }
+        airports.push_back(airportId);
+        qDebug() << airportId;
+    }
+
+    BreadthFirstSearchAlgorithm searchAlgorithm;
+    vector<vector<int>> routes;
+
+    for (int i{0}; i <= airports.size() - 2; i++)
+    {
+        qDebug() << airports[i] << " " << airports[i+1];
+        auto singleSearch = searchAlgorithm.getRoutes(airports[i], airports[i+1]);
+        routes.push_back(singleSearch[0]);
+    }
+    auto singleSearch = searchAlgorithm.getRoutes(airports[airports.size() - 1], airports[0]);
+    routes.push_back(singleSearch[0]);
+
+    fillFlightTable(routes, false);
+
+    auto newRoutes = splitRoutes(routes, airlineId);
+    if (airlineId == -1)
+    {
+        ui->map->connectTheDots(get<2>(newRoutes), QColor{82, 82, 255});
+    }
+    else
+    {
+        ui->map->connectTheDots(get<0>(newRoutes), QColor{255, 82, 82});
+        ui->map->connectTheDots(get<1>(newRoutes), QColor{82, 82, 255});
+        ui->map->connectTheDots(get<2>(newRoutes), QColor{82, 82, 82});
+    }
 }

@@ -39,6 +39,8 @@ private slots:
 
   void on_actionAdd_Route_triggered();
 
+  void on_multiSearchButton_clicked();
+
 private:
   Ui::MainWindow *ui;
   AddRouteDialog addRouteDialog;
@@ -47,7 +49,7 @@ private:
   QFont titleFont{"Helvetica", 18, QFont::Bold};
   QFont standardFont{"Helvetica", 18};
 
-  void fillFlightTable(vector<vector<int>> routes);
+  void fillFlightTable(vector<vector<int>> routes, bool sort);
   std::tuple<vector<tuple<int, int>>, vector<tuple<int, int>>, vector<tuple<int, int>>> splitRoutes(vector<vector<int>> routes, int airline);
 };
 
