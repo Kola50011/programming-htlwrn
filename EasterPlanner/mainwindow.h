@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <dbmanager.h>
 
 namespace Ui {
 class MainWindow;
@@ -15,8 +16,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_clusterButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    DbManager database = DbManager::getInstance();
 };
 
 #endif // MAINWINDOW_H

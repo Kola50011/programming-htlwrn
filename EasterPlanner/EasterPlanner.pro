@@ -1,10 +1,11 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-03-01T22:56:40
+# Project created by QtCreator 2019-03-02T13:53:32
 #
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,10 +26,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    drawablemapwidget.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    drawablemapwidget.h \
+    dbmanager.h \
+    person.h \
+    coordinate.h
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

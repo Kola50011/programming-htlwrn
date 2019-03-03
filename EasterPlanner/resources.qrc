@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>static/Stadtplan.jpg</file>
+    </qresource>
+</RCC>
