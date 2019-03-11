@@ -16,8 +16,8 @@ class server_port : public QDialog
 public:
     explicit server_port(QWidget *parent = nullptr);
     ~server_port();
-    unsigned short int get_port() {
-        return ui->portLineEdit->text().toShort();
+    int get_port() {
+        return ui->portLineEdit->text().toInt();
     }
     QString get_host() {
         return ui->serverLineEdit->text();

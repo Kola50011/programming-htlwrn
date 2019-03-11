@@ -5,6 +5,8 @@
 #include "server_port.h"
 
 #include <QMessageBox>
+#include <QTcpSocket>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,8 +26,28 @@ void MainWindow::on_pushButton_clicked()
     double _lon{ui->lonLineEdit->text().toDouble()};
     QString name = ui->nameLineEdit->text();
 
-    person p{name, _lat, _lon};
+    person p;
+    if (!person::from(name, _lat, _lon, p)) {
+        QMessageBox mb;
+        mb.setText("Your input was invalid!");
+        mb.exec();
+        return;
+    }
 
     server_port* sp = new server_port(this);
-    sp->show();
+    sp->exec();
+    auto host{sp->get_host()};
+    auto port{sp->get_port()};
+
+    qDebug() << QString{("Got person " + p.to_json().dump()).c_str()};
+
+    QTcpSocket sock{this};
+    sock.connectToHost(host, port);
+    if (sock.waitForConnected()) {
+        sock.write(p.to_json().dump().c_str());
+    } else {
+        QMessageBox eb;
+        eb.setText("Error connecting to host!");
+        eb.exec();
+    }
 }
