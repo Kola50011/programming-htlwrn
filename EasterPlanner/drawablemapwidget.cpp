@@ -26,20 +26,37 @@ void DrawableMapWidget::paintEvent(QPaintEvent *)
     painter.drawPixmap(0, 0, pic);
 }
 
-QPoint DrawableMapWidget::personToPoint(Person person)
+QPoint DrawableMapWidget::personToPoint(Person &person)
 {
     return QPoint((person.longitude - leftLong) / (rightLong - leftLong) * mapWidth,
                   (person.latitude - bottomLat) / (topLat - bottomLat) * mapHeight);
 }
 
+QPoint DrawableMapWidget::centerToPoint(Center &center)
+{
+    return QPoint((center.longitude - leftLong) / (rightLong - leftLong) * mapWidth,
+                  (center.latitude - bottomLat) / (topLat - bottomLat) * mapHeight);
+
+}
+
 void DrawableMapWidget::drawPeople(vector<Person> &people, QColor color)
 {
     QPainter painter{&pic};
-    painter.setPen(QPen{QBrush{color}, 6});
-    for (Person person : people)
+    for (int i{0}; i <= people.size() - 2; i++)
     {
-        painter.drawPoint(personToPoint(person));
+        painter.setPen(QPen{QBrush{color}, 15});
+        painter.drawPoint(personToPoint(people[i]));
+        painter.setPen(QPen{QBrush{color}, 5});
+        painter.drawLine(personToPoint(people[i]), personToPoint(people[i + 1]));
     }
+    update();
+}
+
+void DrawableMapWidget::drawCenter(Center &center, QColor color)
+{
+    QPainter painter{&pic};
+    painter.setPen(QPen{QBrush{color}, 30});
+    painter.drawPoint(centerToPoint(center));
     update();
 }
 
@@ -57,6 +74,6 @@ void DrawableMapWidget::resetPic()
     mapHeight = map.height();
     pic = l_pic;
 
-    vector<Person> people = DbManager::getInstance().people;
-    drawPeople(people, QColor{0, 0, 255, 255});
+    //vector<Person> people = DbManager::getInstance().people;
+    //drawPeople(people, QColor{0, 0, 255, 255});
 }

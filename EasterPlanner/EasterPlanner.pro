@@ -34,7 +34,8 @@ HEADERS += \
     drawablemapwidget.h \
     dbmanager.h \
     person.h \
-    coordinate.h
+    coordinate.h \
+    center.h
 
 FORMS += \
         mainwindow.ui

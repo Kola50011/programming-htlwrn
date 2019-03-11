@@ -13,6 +13,7 @@
 #include <QColor>
 #include <QPainter>
 
+#include "center.h"
 #include "person.h"
 #include "dbmanager.h"
 #include <vector>
@@ -26,8 +27,10 @@ public:
   void paintEvent(QPaintEvent *e);
   void resetPic();
 
-  QPoint personToPoint(Person person);
+  QPoint personToPoint(Person &person);
+  QPoint centerToPoint(Center &center);
   void drawPeople(vector<Person> &people, QColor color);
+  void drawCenter(Center &center, QColor color);
 signals:
 
 public slots:

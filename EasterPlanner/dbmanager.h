@@ -70,7 +70,7 @@ private:
               "latitude decimal(9,6), "
               "longitude decimal(9,6))");
 
-    for (int i{0}; i <= 200; i++)
+    for (int i{0}; i <= 250; i++)
     {
         addPerson(QString::number(i), fRand(47.786898, 47.846533), fRand(16.209652, 16.281017));
     }
