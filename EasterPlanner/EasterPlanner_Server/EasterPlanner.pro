@@ -35,6 +35,7 @@ HEADERS += \
     dbmanager.h \
     person.h \
     coordinate.h \
+    center.h \
     center.h
 
 FORMS += \

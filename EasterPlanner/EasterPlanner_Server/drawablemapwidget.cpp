@@ -29,13 +29,13 @@ void DrawableMapWidget::paintEvent(QPaintEvent *)
 QPoint DrawableMapWidget::personToPoint(Person &person)
 {
     return QPoint((person.longitude - leftLong) / (rightLong - leftLong) * mapWidth,
-                  (person.latitude - bottomLat) / (topLat - bottomLat) * mapHeight);
+                  (person.latitude - topLat) / (bottomLat - topLat) * mapHeight);
 }
 
 QPoint DrawableMapWidget::centerToPoint(Center &center)
 {
     return QPoint((center.longitude - leftLong) / (rightLong - leftLong) * mapWidth,
-                  (center.latitude - bottomLat) / (topLat - bottomLat) * mapHeight);
+                  (center.latitude - topLat) / (bottomLat - topLat) * mapHeight);
 
 }
 
