@@ -72,6 +72,10 @@ vector<Person> calculateRoute(Center &center)
 
 void MainWindow::on_clusterButton_clicked()
 {
+    if (ui->amountEdit->text().isEmpty()) {
+        return;
+    }
+
     DbManager database = DbManager::getInstance();
     vector<Person> people = database.people;
     vector<Center> centers;

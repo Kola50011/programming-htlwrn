@@ -42,13 +42,15 @@ QPoint DrawableMapWidget::centerToPoint(Center &center)
 void DrawableMapWidget::drawPeople(vector<Person> &people, QColor color)
 {
     QPainter painter{&pic};
-    for (int i{0}; i <= people.size() - 2; i++)
+    for (int i{0}; i < people.size() - 1; i++)
     {
         painter.setPen(QPen{QBrush{color}, 15});
         painter.drawPoint(personToPoint(people[i]));
         painter.setPen(QPen{QBrush{color}, 5});
         painter.drawLine(personToPoint(people[i]), personToPoint(people[i + 1]));
     }
+    painter.setPen(QPen{QBrush{color}, 15});
+    painter.drawPoint(personToPoint(people[people.size() - 1]));
     update();
 }
 
@@ -56,7 +58,11 @@ void DrawableMapWidget::drawCenter(Center &center, QColor color)
 {
     QPainter painter{&pic};
     painter.setPen(QPen{QBrush{color}, 30});
-    painter.drawPoint(centerToPoint(center));
+    QRect rect;
+    rect.setWidth(10);
+    rect.setHeight(10);
+    rect.moveCenter(centerToPoint(center));
+    painter.drawEllipse(rect);
     update();
 }
 

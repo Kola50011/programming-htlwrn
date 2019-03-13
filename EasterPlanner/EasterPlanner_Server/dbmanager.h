@@ -25,7 +25,7 @@ public:
     void addPerson(QString name, double latitude, double longitude)
     {
         QSqlQuery query;
-        query.prepare("insert or replace into people values (?, ?, ?);");
+        query.prepare("replace into people values (?, ?, ?);");
         query.addBindValue(name);
         query.addBindValue(latitude);
         query.addBindValue(longitude);
@@ -73,6 +73,7 @@ private:
               "(name varchar(64) primary key, "
               "latitude decimal(9,6), "
               "longitude decimal(9,6))");
+    createQuery.exec("CREATE UNIQUE INDEX idx_name ON people (name);");
 
     for (int i{0}; i <= 250; i++)
     {
