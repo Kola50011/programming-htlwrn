@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QTcpSocket>
 #include <QDebug>
+#include <QJsonDocument>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -39,12 +40,11 @@ void MainWindow::on_pushButton_clicked()
     auto host{sp->get_host()};
     auto port{sp->get_port()};
 
-    qDebug() << QString{("Got person " + p.to_json().dump()).c_str()};
-
     QTcpSocket sock{this};
     sock.connectToHost(host, port);
     if (sock.waitForConnected()) {
-        sock.write(p.to_json().dump().c_str());
+        sock.write(QJsonDocument{p.to_json()}.toJson());
+        sock.flush();
     } else {
         QMessageBox eb;
         eb.setText("Error connecting to host!");

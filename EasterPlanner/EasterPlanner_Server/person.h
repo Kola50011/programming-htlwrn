@@ -2,6 +2,8 @@
 #define PERSON_H
 
 #include <math.h>
+#include <QString>
+#include <QMetaType>
 
 using namespace std;
 
@@ -23,6 +25,11 @@ public:
         return powf( _lat - latitude, 2.0) +
                powf( _long - longitude, 2.0);
     }
+
+    Person() {}
+    ~Person() {}
 };
+
+Q_DECLARE_METATYPE(Person);
 
 #endif // PERSON_H

@@ -4,6 +4,7 @@
 #include <QString>
 #include "json.hpp"
 #include <optional>
+#include <QJsonObject>
 
 using json = nlohmann::json;
 
@@ -15,9 +16,9 @@ public:
 
     person() {}
 
-    json to_json() {
+    QJsonObject to_json() {
         return {
-            {"name", name.toStdString()},
+            {"name", name},
             {"lat", latitude},
             {"lon", longitude}
         };

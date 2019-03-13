@@ -8,11 +8,13 @@
 #include "center.h"
 #include <thread>
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, int port) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    s{this, port}
 {
     ui->setupUi(this);
+    s.set_dbm(&DbManager::getInstance());
 }
 
 MainWindow::~MainWindow()

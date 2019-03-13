@@ -32,6 +32,10 @@ public:
         query.exec();
     }
 
+    void addPerson(Person p) {
+        addPerson(p.name, p.latitude, p.longitude);
+    }
+
     double getRandomLatitude()
     {
       return fRand(47.786898, 47.846533);

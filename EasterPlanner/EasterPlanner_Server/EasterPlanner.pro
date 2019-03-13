@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT       += sql
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,7 +28,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    drawablemapwidget.cpp
+    drawablemapwidget.cpp \
+    server.cpp \
+    client_conn.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -36,7 +39,10 @@ HEADERS += \
     person.h \
     coordinate.h \
     center.h \
-    center.h
+    center.h \
+    server.h \
+    client_conn.h \
+    json.hpp
 
 FORMS += \
         mainwindow.ui
