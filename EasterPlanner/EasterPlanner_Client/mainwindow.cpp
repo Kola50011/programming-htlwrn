@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    abd.setWindowTitle("EasterPlanner - About");
 }
 
 MainWindow::~MainWindow()
@@ -55,4 +56,9 @@ void MainWindow::on_actionSettings_triggered()
     host = sp->get_host();
     port = sp->get_port();
 
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    abd.show();
 }

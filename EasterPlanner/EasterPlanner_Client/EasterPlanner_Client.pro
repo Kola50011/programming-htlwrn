@@ -28,17 +28,20 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    server_port.cpp
+    server_port.cpp \
+    aboutdialog.cpp
 
 HEADERS += \
         mainwindow.h \
     person.h \
     json.hpp \
-    server_port.h
+    server_port.h \
+    aboutdialog.h
 
 FORMS += \
         mainwindow.ui \
-    server_port.ui
+    server_port.ui \
+    aboutdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
