@@ -16,6 +16,13 @@ class server_port : public QDialog
 public:
     explicit server_port(QString& host, QString& port, QWidget *parent = nullptr);
     ~server_port();
+    QString get_host() {
+        return ui->serverLineEdit->text();
+    }
+
+    QString get_port() {
+        return ui->portLineEdit->text();
+    }
 
 
 private slots:

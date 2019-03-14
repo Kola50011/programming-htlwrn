@@ -8,6 +8,8 @@ server::server(QObject* parent, int port) :
     qRegisterMetaType<Person>();
     if (!listen(QHostAddress::Any, port)) {
         qDebug() << "Could not start server";
+    } else {
+        qDebug() << "Server listening on port" << port;
     }
 }
 

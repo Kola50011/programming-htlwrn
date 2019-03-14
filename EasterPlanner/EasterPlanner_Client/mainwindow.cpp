@@ -52,5 +52,7 @@ void MainWindow::on_actionSettings_triggered()
 
     server_port* sp = new server_port(host, port, this);
     sp->exec();
+    host = sp->get_host();
+    port = sp->get_port();
 
 }
