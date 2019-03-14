@@ -35,13 +35,8 @@ void MainWindow::on_pushButton_clicked()
         return;
     }
 
-    server_port* sp = new server_port(this);
-    sp->exec();
-    auto host{sp->get_host()};
-    auto port{sp->get_port()};
-
     QTcpSocket sock{this};
-    sock.connectToHost(host, port);
+    sock.connectToHost(host, port.toInt());
     if (sock.waitForConnected()) {
         sock.write(QJsonDocument{p.to_json()}.toJson());
         sock.flush();
@@ -50,4 +45,12 @@ void MainWindow::on_pushButton_clicked()
         eb.setText("Error connecting to host!");
         eb.exec();
     }
+}
+
+void MainWindow::on_actionSettings_triggered()
+{
+
+    server_port* sp = new server_port(host, port, this);
+    sp->exec();
+
 }

@@ -49,7 +49,7 @@
     <item row="0" column="1">
      <widget class="QLineEdit" name="serverLineEdit">
       <property name="text">
-       <string>localhost</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -63,7 +63,7 @@
     <item row="1" column="1">
      <widget class="QLineEdit" name="portLineEdit">
       <property name="text">
-       <string>6969</string>
+       <string/>
       </property>
      </widget>
     </item>
