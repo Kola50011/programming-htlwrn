@@ -14,10 +14,25 @@
 #include <QStringList>
 #include <QPainter>
 #include <QApplication>
+#include "person.h"
+#include "center.h"
 
 DrawableMapWidget::DrawableMapWidget(QWidget *parent) : QWidget(parent)
 {
     resetPic();
+
+    double leftLong{16.209652};
+    double rightLong{16.281017};
+    double topLat{47.846533};
+    double bottomLat{47.786898};
+
+    Person::setValues(leftLong, rightLong,
+                topLat, bottomLat,
+                mapHeight, mapWidth);
+
+    Center::setValues(leftLong, rightLong,
+                      topLat, bottomLat,
+                      mapHeight, mapWidth);
 }
 
 void DrawableMapWidget::paintEvent(QPaintEvent *)
@@ -26,31 +41,18 @@ void DrawableMapWidget::paintEvent(QPaintEvent *)
     painter.drawPixmap(0, 0, pic);
 }
 
-QPoint DrawableMapWidget::personToPoint(Person &person)
-{
-    return QPoint((person.longitude - leftLong) / (rightLong - leftLong) * mapWidth,
-                  (person.latitude - topLat) / (bottomLat - topLat) * mapHeight);
-}
-
-QPoint DrawableMapWidget::centerToPoint(Center &center)
-{
-    return QPoint((center.longitude - leftLong) / (rightLong - leftLong) * mapWidth,
-                  (center.latitude - topLat) / (bottomLat - topLat) * mapHeight);
-
-}
-
 void DrawableMapWidget::drawPeople(vector<Person> &people, QColor color)
 {
     QPainter painter{&pic};
     for (int i{0}; i < people.size() - 1; i++)
     {
         painter.setPen(QPen{QBrush{color}, 15});
-        painter.drawPoint(personToPoint(people[i]));
+        painter.drawPoint(people[i].toPoint());
         painter.setPen(QPen{QBrush{color}, 5});
-        painter.drawLine(personToPoint(people[i]), personToPoint(people[i + 1]));
+        painter.drawLine(people[i].toPoint(), people[i + 1].toPoint());
     }
     painter.setPen(QPen{QBrush{color}, 15});
-    painter.drawPoint(personToPoint(people[people.size() - 1]));
+    painter.drawPoint(people[people.size() - 1].toPoint());
     update();
 }
 
@@ -61,7 +63,7 @@ void DrawableMapWidget::drawCenter(Center &center, QColor color)
     QRect rect;
     rect.setWidth(10);
     rect.setHeight(10);
-    rect.moveCenter(centerToPoint(center));
+    rect.moveCenter(center.toPoint());
     painter.drawEllipse(rect);
     update();
 }

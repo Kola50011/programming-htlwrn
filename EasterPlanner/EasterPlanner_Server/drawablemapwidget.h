@@ -36,11 +36,6 @@ signals:
 public slots:
 
 private:
-  double leftLong{16.209652};
-  double rightLong{16.281017};
-  double topLat{47.846533};
-  double bottomLat{47.786898};
-
   double mapWidth;
   double mapHeight;
   QPixmap pic;

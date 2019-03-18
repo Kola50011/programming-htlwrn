@@ -4,11 +4,20 @@
 #include <math.h>
 #include <QString>
 #include <QMetaType>
+#include <QPoint>
 
 using namespace std;
 
 class Person {
 public:
+    inline static double leftLong;
+    inline static double rightLong;
+    inline static double topLat;
+    inline static double bottomLat;
+
+    inline static double mapWidth;
+    inline static double mapHeight;
+
     QString name;
     long double latitude;
     long double longitude;
@@ -20,10 +29,28 @@ public:
         longitude = _longitude;
     }
 
+    static void setValues(double _leftLong, double _rightLong,
+               double _topLat, double _bottomLat,
+               double _mapWidth, double _mapHeight)
+    {
+        leftLong = _leftLong;
+        rightLong = _rightLong;
+        topLat = _topLat;
+        bottomLat = _bottomLat;
+        mapWidth = _mapWidth;
+        mapHeight = _mapHeight;
+    }
+
     double getDistance(long double _lat, long double _long)
     {
         return powf( _lat - latitude, 2.0) +
                powf( _long - longitude, 2.0);
+    }
+
+    QPoint toPoint()
+    {
+        return QPoint((longitude - leftLong) / (rightLong - leftLong) * mapWidth,
+                      (latitude - topLat) / (bottomLat - topLat) * mapHeight);
     }
 
     Person() {}
