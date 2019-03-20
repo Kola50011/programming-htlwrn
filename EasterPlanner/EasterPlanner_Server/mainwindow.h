@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <dbmanager.h>
 #include "server.h"
+#include "center.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,12 +22,13 @@ private slots:
     void on_clusterButton_clicked();
 
 public slots:
-    //void dmw_clicked(int x, int y);
+    void dmw_clicked(int x, int y);
 
 private:
     Ui::MainWindow *ui;
     DbManager database = DbManager::getInstance();
     server s;
+    vector<Center> center_objs;
 };
 
 #endif // MAINWINDOW_H

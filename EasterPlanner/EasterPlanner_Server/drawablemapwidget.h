@@ -31,6 +31,7 @@ public:
   QPoint centerToPoint(Center &center);
   void drawPeople(vector<Person> &people, QColor color);
   void drawCenter(Center &center, QColor color);
+  void connectPeople(vector<Person>& people, QColor color);
 signals:
   void clicked(int x, int y);
 
@@ -40,6 +41,10 @@ private:
   double mapWidth;
   double mapHeight;
   QPixmap pic;
+
+  // QWidget interface
+protected:
+  virtual void mouseReleaseEvent(QMouseEvent *event);
 };
 
 #endif // DRAWABLEMAPWIDGET_H

@@ -7,6 +7,7 @@
 #include "dbmanager.h"
 #include "center.h"
 #include <thread>
+#include <QRect>
 
 MainWindow::MainWindow(QWidget *parent, int port) :
     QMainWindow(parent),
@@ -15,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent, int port) :
 {
     ui->setupUi(this);
     s.set_dbm(&DbManager::getInstance());
+    connect(ui->widget, &DrawableMapWidget::clicked, this, &MainWindow::dmw_clicked);
 }
 
 MainWindow::~MainWindow()
@@ -109,7 +111,19 @@ void MainWindow::on_clusterButton_clicked()
     ui->widget->resetPic();
     for (Center &center : centers)
     {
-        auto people = calculateRoute(center);
-        ui->widget->drawPeople(people, center.col);
+        ui->widget->drawPeople(center.people, center.col);
+    }
+    center_objs = centers;
+}
+
+void MainWindow::dmw_clicked(int x, int y)
+{
+    QPoint clicked(x, y);
+    for (Center& c : center_objs) {
+        QRect bb = c.get_bounding_box();
+        if (bb.contains(clicked)) {
+            auto people = calculateRoute(c);
+            ui->widget->connectPeople(people, c.col);
+        }
     }
 }

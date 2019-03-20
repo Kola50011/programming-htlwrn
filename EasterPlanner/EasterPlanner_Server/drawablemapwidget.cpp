@@ -14,6 +14,7 @@
 #include <QStringList>
 #include <QPainter>
 #include <QApplication>
+#include <QMouseEvent>
 #include "person.h"
 #include "center.h"
 
@@ -66,6 +67,26 @@ void DrawableMapWidget::drawCenter(Center &center, QColor color)
     rect.moveCenter(center.toPoint());
     painter.drawEllipse(rect);
     update();
+}
+
+void DrawableMapWidget::connectPeople(vector<Person> &people, QColor color)
+{
+    QPainter painter{&pic};
+    for (int i{0}; i < people.size() - 1; i++)
+    {
+//        painter.setPen(QPen{QBrush{color}, 15});
+//        painter.drawPoint(people[i].toPoint());
+        painter.setPen(QPen{QBrush{color}, 5});
+        painter.drawLine(people[i].toPoint(), people[i + 1].toPoint());
+    }
+//    painter.setPen(QPen{QBrush{color}, 15});
+//    painter.drawPoint(people[people.size() - 1].toPoint());
+    update();
+}
+
+void DrawableMapWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+    emit clicked(event->x(), event->y());
 }
 
 void DrawableMapWidget::resetPic()
