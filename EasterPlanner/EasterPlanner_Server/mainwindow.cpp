@@ -82,7 +82,10 @@ void MainWindow::on_clusterButton_clicked()
 
     for (int i{1}; i <= ui->amountEdit->text().toInt(); i++)
     {
-        centers.push_back(Center(database.getRandomLatitude(), database.getRandomLongitude()));
+        int r1 = rand()%(255-0 + 1) + 0;
+        int r2 = rand()%(255-0 + 1) + 0;
+        int r3 = rand()%(255-0 + 1) + 0;
+        centers.push_back(Center(database.getRandomLatitude(), database.getRandomLongitude(), QColor(r1, r2, r3)));
     }
 
     bool centerChanged = true;
@@ -106,11 +109,7 @@ void MainWindow::on_clusterButton_clicked()
     ui->widget->resetPic();
     for (Center &center : centers)
     {
-        int r1 = rand()%(255-0 + 1) + 0;
-        int r2 = rand()%(255-0 + 1) + 0;
-        int r3 = rand()%(255-0 + 1) + 0;
         auto people = calculateRoute(center);
-        ui->widget->drawPeople(people, QColor(r1, r2, r3));
-        ui->widget->drawCenter(center, QColor(r1, r2, r3));
+        ui->widget->drawPeople(people, center.col);
     }
 }

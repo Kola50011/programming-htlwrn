@@ -48,8 +48,8 @@ void DrawableMapWidget::drawPeople(vector<Person> &people, QColor color)
     {
         painter.setPen(QPen{QBrush{color}, 15});
         painter.drawPoint(people[i].toPoint());
-        painter.setPen(QPen{QBrush{color}, 5});
-        painter.drawLine(people[i].toPoint(), people[i + 1].toPoint());
+        //painter.setPen(QPen{QBrush{color}, 5});
+        //painter.drawLine(people[i].toPoint(), people[i + 1].toPoint());
     }
     painter.setPen(QPen{QBrush{color}, 15});
     painter.drawPoint(people[people.size() - 1].toPoint());

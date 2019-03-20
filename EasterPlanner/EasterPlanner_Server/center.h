@@ -5,6 +5,8 @@
 #include <person.h>
 #include <algorithm>
 #include <QDebug>
+#include <QColor>
+#include <QRect>
 
 using namespace std;
 
@@ -20,12 +22,15 @@ public:
     double latitude;
     double longitude;
 
+    QColor col;
+
     vector<Person> people;
 
-    Center(double _latitude, double _longitude)
+    Center(double _latitude, double _longitude, QColor _col)
     {
         latitude = _latitude;
         longitude = _longitude;
+        col = _col;
     }
 
     static void setValues(double _leftLong, double _rightLong,
@@ -112,6 +117,35 @@ public:
     {
         return QPoint((longitude - leftLong) / (rightLong - leftLong) * mapWidth,
                       (latitude - topLat) / (bottomLat - topLat) * mapHeight);
+    }
+
+    QRect get_bounding_box() {
+        int x_min = INT_MAX;
+        int x_max = INT_MIN;
+        int y_min = INT_MAX;
+        int y_max = INT_MIN;
+
+        for (Person& person : people) {
+            QPoint p = person.toPoint();
+            if (p.x() < x_min) {
+                x_min = p.x();
+            }
+            if (p.x() > x_max) {
+                x_max = p.x();
+            }
+            if (p.y() < y_min) {
+                y_min = p.y();
+            }
+            if (p.y() > y_max) {
+                y_max = p.y();
+            }
+        }
+
+        QPoint min_p{x_min, y_min};
+        QPoint max_p{x_max, y_max};
+
+
+        return QRect{min_p, max_p};
     }
 };
 

@@ -32,6 +32,7 @@ public:
   void drawPeople(vector<Person> &people, QColor color);
   void drawCenter(Center &center, QColor color);
 signals:
+  void clicked(int x, int y);
 
 public slots:
 

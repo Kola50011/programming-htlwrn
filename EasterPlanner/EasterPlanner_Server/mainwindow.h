@@ -20,6 +20,9 @@ public:
 private slots:
     void on_clusterButton_clicked();
 
+public slots:
+    //void dmw_clicked(int x, int y);
+
 private:
     Ui::MainWindow *ui;
     DbManager database = DbManager::getInstance();
