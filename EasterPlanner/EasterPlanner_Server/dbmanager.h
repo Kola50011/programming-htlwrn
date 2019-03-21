@@ -1,3 +1,9 @@
+/*
+ * authors: Lampalzer Konstantin, Königsreiter Simon, Glavanits Marcel, Lampalzer Alexander
+ * date: 21.03.2019
+ * class: 5BHIF
+ */
+
 #ifndef DBMANAGER_H
 #define DBMANAGER_H
 

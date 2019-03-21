@@ -1,3 +1,9 @@
+/*
+ * authors: Lampalzer Konstantin, Königsreiter Simon, Glavanits Marcel, Lampalzer Alexander
+ * date: 21.03.2019
+ * class: 5BHIF
+ */
+
 #include "server_port.h"
 #include "ui_server_port.h"
 

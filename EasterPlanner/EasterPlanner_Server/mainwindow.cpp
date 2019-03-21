@@ -1,3 +1,9 @@
+/*
+ * authors: Lampalzer Konstantin, Königsreiter Simon, Glavanits Marcel, Lampalzer Alexander
+ * date: 21.03.2019
+ * class: 5BHIF
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -16,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent, int port) :
     s{this, port}
 {
     ui->setupUi(this);
+    abd.setWindowTitle("EasterPlanner - About");
     s.set_dbm(&DbManager::getInstance());
     connect(ui->widget, &DrawableMapWidget::clicked, this, &MainWindow::dmw_clicked);
     connect(ui->horizontalSlider, &QSlider::valueChanged, this, &MainWindow::slider_moved);
@@ -136,4 +143,9 @@ void MainWindow::dmw_clicked(int x, int y)
 void MainWindow::slider_moved(int value)
 {
     ui->amountLabel->setText((std::string{"Clusters: "} + std::to_string(value)).c_str());
+}
+
+void MainWindow::on_actionInfo_triggered()
+{
+    abd.show();
 }

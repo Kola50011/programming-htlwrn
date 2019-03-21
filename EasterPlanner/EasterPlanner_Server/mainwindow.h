@@ -1,3 +1,9 @@
+/*
+ * authors: Lampalzer Konstantin, Königsreiter Simon, Glavanits Marcel, Lampalzer Alexander
+ * date: 21.03.2019
+ * class: 5BHIF
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -5,6 +11,7 @@
 #include <dbmanager.h>
 #include "server.h"
 #include "center.h"
+#include "aboutdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -21,12 +28,15 @@ public:
 private slots:
     void on_clusterButton_clicked();
 
+    void on_actionInfo_triggered();
+
 public slots:
     void dmw_clicked(int x, int y);
     void slider_moved(int val);
 
 private:
     Ui::MainWindow *ui;
+    AboutDialog abd;
     DbManager database = DbManager::getInstance();
     server s;
     vector<Center> center_objs;

@@ -1,3 +1,9 @@
+/*
+ * authors: Lampalzer Konstantin, Königsreiter Simon, Glavanits Marcel, Lampalzer Alexander
+ * date: 21.03.2019
+ * class: 5BHIF
+ */
+
 #ifndef SERVER_PORT_H
 #define SERVER_PORT_H
 
