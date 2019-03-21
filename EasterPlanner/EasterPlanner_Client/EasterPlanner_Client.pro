@@ -34,7 +34,6 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     person.h \
-    json.hpp \
     server_port.h \
     aboutdialog.h
 

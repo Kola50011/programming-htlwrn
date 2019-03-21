@@ -2,11 +2,9 @@
 #define PERSON_H
 
 #include <QString>
-#include "json.hpp"
 #include <optional>
 #include <QJsonObject>
 
-using json = nlohmann::json;
 
 class person {
 public:

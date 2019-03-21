@@ -23,6 +23,7 @@ private slots:
 
 public slots:
     void dmw_clicked(int x, int y);
+    void slider_moved(int val);
 
 private:
     Ui::MainWindow *ui;

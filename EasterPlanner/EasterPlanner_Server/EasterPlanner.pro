@@ -41,8 +41,7 @@ HEADERS += \
     center.h \
     center.h \
     server.h \
-    client_conn.h \
-    json.hpp
+    client_conn.h
 
 FORMS += \
         mainwindow.ui

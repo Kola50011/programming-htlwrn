@@ -75,7 +75,7 @@ private:
               "longitude decimal(9,6))");
     createQuery.exec("CREATE UNIQUE INDEX idx_name ON people (name);");
 
-    for (int i{0}; i <= 250; i++)
+    for (int i{0}; i < 255; i++)
     {
         addPerson(QString::number(i), fRand(47.786898, 47.846533), fRand(16.209652, 16.281017));
     }

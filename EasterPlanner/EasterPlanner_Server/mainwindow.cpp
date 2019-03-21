@@ -8,6 +8,7 @@
 #include "center.h"
 #include <thread>
 #include <QRect>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent, int port) :
     QMainWindow(parent),
@@ -17,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent, int port) :
     ui->setupUi(this);
     s.set_dbm(&DbManager::getInstance());
     connect(ui->widget, &DrawableMapWidget::clicked, this, &MainWindow::dmw_clicked);
+    connect(ui->horizontalSlider, &QSlider::valueChanged, this, &MainWindow::slider_moved);
 }
 
 MainWindow::~MainWindow()
@@ -74,15 +76,18 @@ vector<Person> calculateRoute(Center &center)
 
 void MainWindow::on_clusterButton_clicked()
 {
-    if (ui->amountEdit->text().isEmpty()) {
-        return;
-    }
-
     DbManager database = DbManager::getInstance();
     vector<Person> people = database.people;
     vector<Center> centers;
 
-    for (int i{1}; i <= ui->amountEdit->text().toInt(); i++)
+    if (people.size() < ui->horizontalSlider->value()) {
+        QMessageBox mb;
+        mb.setText("You can't have more clusters than people!");
+        mb.exec();
+        return;
+    }
+
+    for (int i{1}; i <= ui->horizontalSlider->value(); i++)
     {
         int r1 = rand()%(255-0 + 1) + 0;
         int r2 = rand()%(255-0 + 1) + 0;
@@ -126,4 +131,9 @@ void MainWindow::dmw_clicked(int x, int y)
             ui->widget->connectPeople(people, c.col);
         }
     }
+}
+
+void MainWindow::slider_moved(int value)
+{
+    ui->amountLabel->setText((std::string{"Clusters: "} + std::to_string(value)).c_str());
 }
