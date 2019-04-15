@@ -1,0 +1,25 @@
+Build started at 2019-04-15T17:31:01.960596
+Main binary: /usr/bin/python3
+Python system: Linux
+The Meson build system
+Version: 0.45.1
+Source dir: /home/koka/workspace/programming-htlwrn/math-parser
+Build dir: /home/koka/workspace/programming-htlwrn/math-parser/build
+Build type: native build
+Project name: mathParser
+Sanity testing C++ compiler: c++
+Is cross compiler: False.
+Sanity check compiler command line: c++ /home/koka/workspace/programming-htlwrn/math-parser/build/meson-private/sanitycheckcpp.cc -o /home/koka/workspace/programming-htlwrn/math-parser/build/meson-private/sanitycheckcpp.exe
+Sanity check compile stdout:
+
+-----
+Sanity check compile stderr:
+
+-----
+Running test binary command: /home/koka/workspace/programming-htlwrn/math-parser/build/meson-private/sanitycheckcpp.exe
+Native C++ compiler: c++ (gcc 7.3.0 "c++ (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0")
+Build machine cpu family: x86_64
+Build machine cpu: x86_64
+Dependency threads found: YES
+Build targets in project: 1
+Found ninja-1.8.2 at /usr/bin/ninja
