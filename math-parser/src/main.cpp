@@ -1,4 +1,6 @@
-int main(int argc, char const *argv[])
+#include "expressions.hpp"
+
+int main()
 {
     /* code */
     return 0;

@@ -3,63 +3,79 @@
 
 #include <string>
 
-class expression {
-public:
+class Expression
+{
+  public:
     virtual double evaluate() = 0;
+    virtual ~Expression() = 0; // Virtual deconstructor definieren, cauz: ‘class Expression’ has virtual functions and accessible non-virtual destructor
 };
 
-class addition : public expression {
-public:
-    addition(expression& exp1, expression& exp2) : lhs{exp1}, rhs{exp2} {};
-    double evaluate() override {
-        return lhs.evaluate() + rhs.evaluate();
+class Addition : public Expression
+{
+  public:
+    Addition(Expression &_left, Expression &_right) : left{_left}, right{_right} {};
+    double evaluate() override
+    {
+        return left.evaluate() + right.evaluate();
     };
 
-private:
-    expression& lhs;
-    expression& rhs;
+  private:
+    Expression &left;
+    Expression &right;
 };
 
-class substraction : public expression {
-public:
-    substraction(expression& exp1, expression& exp2) : lhs{exp1}, rhs{exp2} {};
-    double evaluate() override {
-        return lhs.evaluate() - rhs.evaluate();
+class Substraction : public Expression
+{
+  public:
+    Substraction(Expression &_left, Expression &_right) : left{_left}, right{_right} {};
+    double evaluate() override
+    {
+        return left.evaluate() - right.evaluate();
     };
-private:
-    expression& lhs;
-    expression& rhs;    
+
+  private:
+    Expression &left;
+    Expression &right;
 };
 
-class multiplication : public expression {
-public:
-    multiplication(expression& exp1, expression& exp2) : lhs{exp1}, rhs{exp2} {};
-    double evaluate() override {
-        return lhs.evaluate() * rhs.evaluate();
+class Multiplication : public Expression
+{
+  public:
+    Multiplication(Expression &_left, Expression &_right) : left{_left}, right{_right} {};
+    double evaluate() override
+    {
+        return left.evaluate() * right.evaluate();
     };
-private:
-    expression& lhs;
-    expression& rhs;    
+
+  private:
+    Expression &left;
+    Expression &right;
 };
 
-class division : public expression {
-public:
-    division(expression& exp1, expression& exp2) : lhs{exp1}, rhs{exp2} {};
-    double evaluate() override {
-        return lhs.evaluate() / rhs.evaluate();
+class Division : public Expression
+{
+  public:
+    Division(Expression &_left, Expression &_right) : left{_left}, right{_right} {};
+    double evaluate() override
+    {
+        return left.evaluate() / right.evaluate();
     };
-private:
-    expression& lhs;
-    expression& rhs;    
+
+  private:
+    Expression &left;
+    Expression &right;
 };
 
-class terminal : public expression {
-public:
-    terminal(std::string num) {}
-    double evaluate() override {
+class Terminal : public Expression
+{
+  public:
+    Terminal(double _num) : num{_num} {}
+    double evaluate() override
+    {
         return num;
     };
-private:
+
+  private:
     double num;
 };
 
