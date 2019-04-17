@@ -10,6 +10,7 @@ public:
   virtual ~Expression(){}; // Virtual deconstructor definieren, cauz: ‘class Expression’ has virtual functions and accessible non-virtual destructor
   virtual void setLeft(Expression *left) = 0;
   virtual void setRight(Expression *right) = 0;
+  virtual int precedence() const = 0;
 };
 
 class Terminal : public Expression
@@ -30,16 +31,19 @@ public:
   virtual void setLeft(Expression *) {}
   virtual void setRight(Expression *) {}
 
+  virtual int precedence() const
+  {
+    return 1;
+  }
+
 private:
   double num;
 };
 
-Terminal *EMPTY_TERMINAL = new Terminal{0.0};
-
 class Addition : public Expression
 {
 public:
-  Addition(Expression *_left, Expression *_right) : left{_left}, right{_right} {};
+  Addition(Expression *_left = nullptr, Expression *_right = nullptr) : left{_left}, right{_right} {};
   virtual double evaluate()
   {
     return left->evaluate() + right->evaluate();
@@ -53,6 +57,10 @@ public:
   {
     right = _right;
   }
+  virtual int precedence() const
+  {
+    return 2;
+  }
 
 private:
   Expression *left;
@@ -62,7 +70,7 @@ private:
 class Substraction : public Expression
 {
 public:
-  Substraction(Expression *_left, Expression *_right) : left{_left}, right{_right} {};
+  Substraction(Expression *_left = nullptr, Expression *_right = nullptr) : left{_left}, right{_right} {};
   virtual double evaluate()
   {
     return left->evaluate() - right->evaluate();
@@ -76,6 +84,10 @@ public:
   {
     right = _right;
   }
+  virtual int precedence() const
+  {
+    return 2;
+  }
 
 private:
   Expression *left;
@@ -85,7 +97,7 @@ private:
 class Multiplication : public Expression
 {
 public:
-  Multiplication(Expression *_left, Expression *_right) : left{_left}, right{_right} {};
+  Multiplication(Expression *_left = nullptr, Expression *_right = nullptr) : left{_left}, right{_right} {};
   virtual double evaluate()
   {
     return left->evaluate() * right->evaluate();
@@ -99,6 +111,10 @@ public:
   {
     right = _right;
   }
+  virtual int precedence() const
+  {
+    return 3;
+  }
 
 private:
   Expression *left;
@@ -108,7 +124,7 @@ private:
 class Division : public Expression
 {
 public:
-  Division(Expression *_left, Expression *_right) : left{_left}, right{_right} {};
+  Division(Expression *_left = nullptr, Expression *_right = nullptr) : left{_left}, right{_right} {};
   virtual double evaluate()
   {
     return left->evaluate() / right->evaluate();
@@ -122,6 +138,10 @@ public:
   {
     right = _right;
   }
+  virtual int precedence() const
+  {
+    return 3;
+  }
 
 private:
   Expression *left;
@@ -133,9 +153,10 @@ double Expression::evaluate()
   return -1;
 }
 
-class Exponent : public Expression {
+class Exponent : public Expression
+{
 public:
-  Exponent(Expression *_left, Expression *_right) : left{_left}, right{_right} {};
+  Exponent(Expression *_left = nullptr, Expression *_right = nullptr) : left{_left}, right{_right} {};
   virtual double evaluate()
   {
     return std::pow(left->evaluate(), right->evaluate());
@@ -148,6 +169,10 @@ public:
   virtual void setRight(Expression *_right)
   {
     right = _right;
+  }
+  virtual int precedence() const
+  {
+    return 4;
   }
 
 private:

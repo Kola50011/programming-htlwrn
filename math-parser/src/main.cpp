@@ -1,3 +1,4 @@
+// http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
 #include <string>
 #include <iostream>
 #include <vector>
@@ -5,6 +6,7 @@
 #include <stack>
 
 #include "expressions.hpp"
+#include "parser.hpp"
 
 using namespace std;
 
@@ -23,7 +25,7 @@ int main(int argc, const char *argv[])
     input = std::regex_replace(input, token_re, " $& ");
     cout << "Input: " << input << endl;
 
-    // Tokanize
+    // Tokenize
     istringstream inputStream{input};
     string token;
     vector<string> tokens;
@@ -34,43 +36,9 @@ int main(int argc, const char *argv[])
             tokens.push_back(token);
         }
     }
-    tokens.push_back("_");
 
-    // Build tree
-    stack<Expression *> expressionStack;
-    for (unsigned int i{0}; i < tokens.size() - 1; i++)
-    {
-        auto token = tokens[i];
-        auto next = tokens[i + 1];
-
-        cout << "Token: " << token << " Next: " << next << endl;
-
-        if (token == string{"+"})
-        {
-            Addition *addition = new Addition{EMPTY_TERMINAL, EMPTY_TERMINAL};
-            addition->setLeft(expressionStack.top());
-            expressionStack.pop();
-            expressionStack.push(addition);
-        }
-        else if (token == string{"-"})
-        {
-            Substraction *substraction = new Substraction{EMPTY_TERMINAL, EMPTY_TERMINAL};
-            substraction->setLeft(expressionStack.top());
-            expressionStack.pop();
-            expressionStack.push(substraction);
-        }
-        else
-        {
-            Terminal *terminal = new Terminal{stod(token)};
-            if (expressionStack.empty()) {
-                expressionStack.push(terminal);
-            } else {
-                Expression* expression = expressionStack.top();
-                expression->setRight(terminal);
-            }
-        }
-    }
-    cout << "Len: " << expressionStack.size() << endl;
-    cout << "Result: " << expressionStack.top()->evaluate() << endl;
+    Parser p{tokens};
+    cout << p.parser()->evaluate() << endl;
+    cout << "Index ist: " << p.idx << endl;
     return 0;
 }
