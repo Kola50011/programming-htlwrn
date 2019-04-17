@@ -20,9 +20,9 @@ int main(int argc, const char *argv[])
 
     string input = argv[1];
     std::regex token_re{"\\+|-|\\(|\\)|/|\\*"};
-    std::regex whitespace{" +"};
-    input = std::regex_replace(input, whitespace, "");
+    std::regex whitespace{"\\ +"};
     input = std::regex_replace(input, token_re, " $& ");
+    input = std::regex_replace(input, whitespace, " ");
     cout << "Input: " << input << endl;
 
     // Tokenize
@@ -31,11 +31,13 @@ int main(int argc, const char *argv[])
     vector<string> tokens;
     while (getline(inputStream, token, ' '))
     {
-        if (token != string{" "})
+        if (token != string{" "} || token != string{""})
         {
             tokens.push_back(token);
         }
     }
+
+    tokens.erase(remove_if(tokens.begin(), tokens.end(), [](auto s) { return s == string{""};}), tokens.end());
 
     Parser p{tokens};
     cout << p.parser()->evaluate() << endl;
