@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <cmath>
 
 class Expression
 {
@@ -131,3 +132,25 @@ double Expression::evaluate()
 {
   return -1;
 }
+
+class Exponent : public Expression {
+public:
+  Exponent(Expression *_left, Expression *_right) : left{_left}, right{_right} {};
+  virtual double evaluate()
+  {
+    return std::pow(left->evaluate(), right->evaluate());
+  };
+
+  virtual void setLeft(Expression *_left)
+  {
+    left = _left;
+  }
+  virtual void setRight(Expression *_right)
+  {
+    right = _right;
+  }
+
+private:
+  Expression *left;
+  Expression *right;
+};
