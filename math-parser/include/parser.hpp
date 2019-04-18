@@ -13,10 +13,15 @@ using namespace std;
 class Parser
 {
   public:
-    Parser(vector<string> &_tokens) : tokens{_tokens} {}
+    Parser(vector<string> &_tokens) : tokens{_tokens}
+    {
+        next = tokens[idx];
+    }
     int idx{0};
     vector<string> &tokens;
+    string next;
 
+    // Helpers
     bool isNumber(const string &s)
     {
         try
@@ -33,10 +38,12 @@ class Parser
     void consume()
     {
         idx += 1;
+        next = tokens[idx];
     }
 
     Expression *binary(string token)
     {
+        cout << "Reading: " << token << endl;
         if (token == string{"+"})
         {
             return new Addition();
@@ -53,9 +60,13 @@ class Parser
         {
             return new Division();
         }
-        else
+        else if (token == string{"^"})
         {
             return new Exponent();
+        }
+        else
+        {
+            throw logic_error("Invalid symbol encountered: " + next);
         }
     }
 
@@ -63,7 +74,7 @@ class Parser
     {
         if (tokens[idx] != token)
         {
-            throw logic_error("Syntax error");
+            throw logic_error("Invalid symbol encountered: " + next);
         }
         else
         {
@@ -78,17 +89,58 @@ class Parser
         return operation;
     }
 
-    Expression *parser()
+    double parse()
+    {
+        auto e = E();
+        if (next != string{"end"})
+        {
+            throw logic_error("Invalid symbol encountered: " + next);
+        }
+
+        return e->evaluate();
+    }
+
+    // G:
+    //     E --> T {( "+" | "-" ) T}
+    //     T --> F {( "*" | "/" ) F}
+    //     F --> P ["^" F]
+    //     P --> v | "(" E ")" | "-" T
+
+    Expression *E()
     { // E
         Expression *t = T();
-        auto next = tokens[idx];
         while (next == string{"+"} || next == string{"-"})
         {
             auto *operation = binary(next);
             consume();
             auto *t1 = T();
             t = mkNode(operation, t, t1);
-            next = tokens[idx];
+        }
+        return t;
+    }
+
+    Expression *T()
+    {
+        Expression *t = F();
+        while (next == string{"*"} || next == string{"/"})
+        {
+            auto *operation = binary(next);
+            consume();
+            auto *t1 = F();
+            t = mkNode(operation, t, t1);
+        }
+        return t;
+    }
+
+    Expression *F()
+    {
+        Expression *t = P();
+        if (next == string{"^"})
+        {
+            auto *operation = binary(next);
+            consume();
+            auto *t1 = F();
+            t = mkNode(operation, t, t1);
         }
         return t;
     }
@@ -96,7 +148,6 @@ class Parser
     Expression *P()
     {
         Expression *t = nullptr;
-        auto next = tokens[idx];
         if (isNumber(next))
         {
             t = new Terminal(stod(next));
@@ -106,7 +157,7 @@ class Parser
         else if (next == string{"("})
         {
             consume();
-            t = parser();
+            t = E();
             expect(")");
             return t;
         }
@@ -118,38 +169,7 @@ class Parser
         }
         else
         {
-            throw logic_error("ERROR");
+            throw logic_error("Invalid symbol encountered: " + next);
         }
-    }
-
-    Expression *F()
-    {
-        auto *t = P();
-        auto next = tokens[idx];
-        if (next == string{"^"})
-        {
-            consume();
-            auto *t1 = F();
-            return mkNode(binary(next), t, t1);
-        }
-        else
-        {
-            return t;
-        }
-    }
-
-    Expression *T()
-    {
-        Expression *t = F();
-        auto next = tokens[idx];
-        while (next == string{"*"} || next == string{"/"})
-        {
-            auto *operation = binary(next);
-            consume();
-            auto *t1 = F();
-            t = mkNode(operation, t, t1);
-            next = tokens[idx];
-        }
-        return t;
     }
 };
