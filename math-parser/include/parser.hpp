@@ -99,7 +99,7 @@ class Parser
 
         return e->evaluate();
     }
-
+    
     // G:
     //     E --> T {( "+" | "-" ) T}
     //     T --> F {( "*" | "/" ) F}
