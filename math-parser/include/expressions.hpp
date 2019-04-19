@@ -10,7 +10,6 @@ public:
   virtual ~Expression(){}; // Virtual deconstructor definieren, cauz: ‘class Expression’ has virtual functions and accessible non-virtual destructor
   virtual void setLeft(Expression *left) = 0;
   virtual void setRight(Expression *right) = 0;
-  virtual int precedence() const = 0;
 };
 
 class Terminal : public Expression
@@ -30,11 +29,6 @@ public:
 
   virtual void setLeft(Expression *) {}
   virtual void setRight(Expression *) {}
-
-  virtual int precedence() const
-  {
-    return 1;
-  }
 
 private:
   double num;
@@ -56,10 +50,6 @@ public:
   virtual void setRight(Expression *_right)
   {
     right = _right;
-  }
-  virtual int precedence() const
-  {
-    return 2;
   }
 
 private:
@@ -84,10 +74,6 @@ public:
   {
     right = _right;
   }
-  virtual int precedence() const
-  {
-    return 2;
-  }
 
 private:
   Expression *left;
@@ -111,10 +97,6 @@ public:
   {
     right = _right;
   }
-  virtual int precedence() const
-  {
-    return 3;
-  }
 
 private:
   Expression *left;
@@ -137,10 +119,6 @@ public:
   virtual void setRight(Expression *_right)
   {
     right = _right;
-  }
-  virtual int precedence() const
-  {
-    return 3;
   }
 
 private:
@@ -169,10 +147,6 @@ public:
   virtual void setRight(Expression *_right)
   {
     right = _right;
-  }
-  virtual int precedence() const
-  {
-    return 4;
   }
 
 private:
