@@ -5,17 +5,19 @@
 #include <regex>
 #include <stack>
 
-#include "expressions.hpp"
-#include "parser.hpp"
+#include "graph.hpp"
 
 using namespace std;
 
 int main(int argc, const char *argv[])
 {
-    if (argc != 2)
+    if (argc != 3)
     {
-        cout << "Please provide exactly 1 argument with the mathematical expression!" << endl;
+        cout << "Please provide exactly 2 arguments with the start and end node!" << endl;
         return 1;
     }
+
+    Graph graph{};
+    graph.getShortestPath(argv[1], argv[2]);
     return 0;
 }
