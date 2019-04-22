@@ -21,6 +21,8 @@ und wodurch unterscheiden sie sich.
   * Benötigt Heuristiken, wie z.B. Luftlinie zwischen jedem Knoten + Ende
 
 ## C
+Erklären Sie den Ablauf des von Ihnen für diese Aufgabe als opmal erachteten Algorithmus anhand des Graphen aus Punkt a).
+
 Start: Graz
 Ende: Innsbruck
 
@@ -52,3 +54,27 @@ Jetzt anhand des Beispiels:
    2. Salzburg (HT: 4) nach Innsbruck (T: 132)
    3. Innsbruck (HT: 3) zum Kunden
    4. Absolute Distanz: 322
+
+## D
+Führen Sie weitere Einsatzgebiete von Graphen und welche Algorithmen jeweils eingesetzt werden können an.
+* Netzwerktechnik
+  * Spanning Tree
+* Routinprotokolle
+  * RIP
+* Robotik
+  * Routing
+
+## E
+Welche Möglichkeiten gibt es, einen Graphen zu implemeneren?
+* Directed / Oriented Graph
+  * Die Kanten sind orientiert. D.h. sie können nur von A nach B, aber nicht von B nach A gehen
+* Complete Graph
+  * Ein kompletter Graph beinhaltet alle möglichen Kanten. Er verbindet also ALLE Punkte
+* Tree
+  * Ein Graph OHNE Zyklen 
+
+## F
+Implemeneren Sie den Graphen aus Punkt a) sowie den von Ihnen gewählten Algorithmus.
+
+## G
+Erstellen Sie (Unit) Tests, welche die Funkonsweise testet (verwenden Sie das Ergebnis aus Punkt c)).
