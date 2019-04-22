@@ -39,7 +39,7 @@ public:
     eisenstadt->addNeighbour(graz, 106);
     eisenstadt->addNeighbour(wien, 47);
 
-    klagenfurt->addNeighbour(graz, 193);
+    klagenfurt->addNeighbour(graz, 144);
     klagenfurt->addNeighbour(innsbruck, 240);
     klagenfurt->addNeighbour(salzburg, 144);
 
@@ -98,16 +98,20 @@ public:
     }
 
     map<Node *, double> distances;
+    map<Node *, vector<Node *>> pathTo;
     for (auto node : nodes)
     {
       distances.insert_or_assign(node, DBL_MAX);
+      vector<Node *> emptyVector{};
+      pathTo.insert_or_assign(node, emptyVector);
     }
-    distances.insert_or_assign(startNode, startNode->handlingTime);
+    distances[startNode] = startNode->handlingTime;
+    pathTo[startNode].push_back(startNode);
 
     auto current = startNode;
     while (true)
     {
-      cout << "Current: " << current->name << endl;
+      cout << current->name << endl;
       if (current == endNode)
       {
         break;
@@ -124,6 +128,8 @@ public:
         if (distance < distances[pair.first])
         {
           distances[pair.first] = distance;
+          pathTo[pair.first] = pathTo[current];
+          pathTo[pair.first].push_back(pair.first);
         }
       }
 
@@ -141,5 +147,17 @@ public:
         }
       }
     }
+
+    cout << "Path: ";
+    for (unsigned int i{0}; i < pathTo[endNode].size() - 1; i++)
+    {
+      auto now = pathTo[endNode][i];
+      auto next = pathTo[endNode][i + 1];
+
+      cout << now->name << ": " << now->handlingTime << " --" << now->neightbours[next] << "--> ";
+    }
+    cout << endNode->name << ": " << endNode->handlingTime << endl;
+
+    cout << "Distance: " << distances[endNode] << endl;
   }
 };
