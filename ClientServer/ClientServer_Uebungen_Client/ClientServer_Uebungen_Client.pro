@@ -1,14 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2019-04-27T12:01:06
+# Project created by QtCreator 2019-04-27T12:04:42
 #
 #-------------------------------------------------
 
-QT       += core gui network sql
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = ClientServer_Uebungen
+TARGET = ClientServer_Uebungen_Client
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -22,16 +22,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-CONFIG += c++11
+CONFIG += c++14
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    serversocket.cpp
+        mainwindow.cpp
 
 HEADERS += \
-        mainwindow.h \
-    serversocket.h
+        mainwindow.h
 
 FORMS += \
         mainwindow.ui

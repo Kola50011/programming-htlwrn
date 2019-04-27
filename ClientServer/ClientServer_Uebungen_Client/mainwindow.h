@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QTcpServer>
+#include <QTcpSocket>
 
 namespace Ui {
 class MainWindow;
@@ -17,17 +17,13 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_new_connection();
-
-public slots:
-    void on_sql_received(QString sql);
-
-signals:
-    void sql_reply(QString repl);
+    void on_sendBtn_clicked();
+    void on_data_received();
 
 private:
     Ui::MainWindow *ui;
-    QTcpServer* server;
+    bool connected = false;
+    QTcpSocket* sock;
 };
 
 #endif // MAINWINDOW_H
