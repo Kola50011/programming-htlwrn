@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/static">
+        <file>static/Earthmap.jpg</file>
+    </qresource>
+</RCC>
