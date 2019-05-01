@@ -104,7 +104,7 @@ class Parser
     //     E --> T {( "+" | "-" ) T}
     //     T --> F {( "*" | "/" ) F}
     //     F --> P ["^" F]
-    //     P --> v | "(" E ")" | "-" T
+    //     P --> v | "(" E ")" | "-" P
 
     Expression *E()
     { // E
@@ -164,7 +164,7 @@ class Parser
         else if (next == string{"-"})
         {
             consume();
-            t = F();
+            t = P();
             return mkNode(binary("-"), new Terminal{0}, t);
         }
         else
