@@ -22,8 +22,8 @@ void DrawableMapWidget::paintEvent(QPaintEvent *event)
 QPoint DrawableMapWidget::airportToPoint(Airport &airport)
 {
     return QPoint{
-        (airport.longitude + 180.0) * (WIDTH / 360.0),
-        (airport.latitude  - 90.0 ) * -(HEIGHT / 180.0)
+        static_cast<int>((airport.longitude + 180.0) * (WIDTH / 360.0)),
+        static_cast<int>((airport.latitude  - 90.0 ) * -(HEIGHT / 180.0))
     };
 }
 
