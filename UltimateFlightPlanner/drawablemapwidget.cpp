@@ -40,7 +40,7 @@ void DrawableMapWidget::resetPic()
     for (auto airport : Database::getInstance().airports)
     {
         QPoint point = airportToPoint(airport);
-        qDebug() << point.y();
+        //qDebug() << point.y();
         painter.drawPoint(airportToPoint(airport));
     }
 

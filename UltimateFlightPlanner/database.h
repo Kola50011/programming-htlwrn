@@ -5,8 +5,10 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlDatabase>
+#include <QSqlError>
 #include <vector>
 #include "airport.h"
+#include <memory>
 
 using namespace std;
 
@@ -18,15 +20,21 @@ private:
     {
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
         db.setDatabaseName("AirlineRoutes.db");
-        qDebug() << "DB is open: " << db.open();
+        qDebug() << "DB is open:" << db.open();
 
         getAirports();
     }
 
     void getAirports()
     {
-        QSqlQuery query{"select * from Airport;"};
-        query.exec();
+        QSqlQuery query;
+        if (!query.exec("select * from Airport;")) {
+            qDebug() << "Error while querying db!";
+            qDebug() << "Error:" << query.lastError().text();
+        } else {
+            qDebug() << query.executedQuery();
+            qDebug() << "Got" << query.size() << "Results!";
+        }
 
         while (query.next())
         {
@@ -40,12 +48,13 @@ private:
         }
     }
 
+
 public:
 
     static Database &getInstance()
     {
-        static Database instance;
-        return instance;
+        static Database db;
+        return db;
     }
 
     vector<Airport> airports;
