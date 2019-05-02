@@ -8,6 +8,9 @@
 #include <QSqlDatabase>
 #include <QSqlRecord>
 
+#include <QJsonObject>
+#include <QJsonDocument>
+
 #include <iostream>
 #include "serversocket.h"
 
@@ -40,8 +43,13 @@ void MainWindow::on_new_connection()
     ss->start();
 }
 
-void MainWindow::on_sql_received(QString sql)
+void MainWindow::on_sql_received(QString jsonString)
 {
+    QByteArray jsonArray = jsonString.toStdString().data();
+    QJsonDocument document = QJsonDocument::fromJson(jsonArray);
+    QJsonObject jsonObject = document.object();
+    QString sql = jsonObject["input"].toString();
+
     qDebug() << sql;
 
     QSqlQuery query;

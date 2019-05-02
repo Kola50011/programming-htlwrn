@@ -3,6 +3,8 @@
 
 #include <QTcpSocket>
 #include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -30,15 +32,21 @@ void MainWindow::on_sendBtn_clicked()
             qDebug() << "Failed!";
         }
     }
+    QJsonObject toSend;
+    toSend["input"] = ui->sqlInput->text();
+    QJsonDocument document = QJsonDocument{toSend};
 
-    sock->write(ui->sqlInput->text().toStdString().data());
+    sock->write(document.toJson());
     sock->flush();
 
 }
 
 void MainWindow::on_data_received()
 {
-    QString repl = sock->readAll().toStdString().data();
+    QJsonDocument document = QJsonDocument::fromJson(sock->readAll());
+    QJsonObject jsonObject = document.object();
+    QString repl = jsonObject["input"].toString();
+
     qDebug() << repl;
     ui->messages->append(repl);
 }

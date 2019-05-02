@@ -1,4 +1,6 @@
 #include "serversocket.h"
+#include <QJsonDocument>
+#include <QJsonObject>
 
 void ServerSocket::on_data_received()
 {
@@ -9,7 +11,12 @@ void ServerSocket::on_data_received()
 void ServerSocket::sql_reply_receiver(QString repl)
 {
     qDebug() << repl;
-    socket->write(repl.toStdString().data());
+
+    QJsonObject toSend;
+    toSend["input"] = repl.toStdString().data();
+    QJsonDocument document = QJsonDocument{toSend};
+
+    socket->write(document.toJson());
     socket->flush();
 }
 
