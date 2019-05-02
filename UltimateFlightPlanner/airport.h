@@ -8,6 +8,7 @@
 #define AIRPORT_H
 
 #include <QString>
+#include <QMetaType>
 
 class Airport
 {
@@ -25,9 +26,11 @@ public:
     longitude = _longitude;
     name = _name;
     iata = _iata;
-  };
+  }
 
   Airport() {}
+  ~Airport() {}
 };
+Q_DECLARE_METATYPE(Airport)
 
 #endif // AIRPORT_H

@@ -20,6 +20,7 @@ protected:
 signals:
 
 public slots:
+    void on_calculate_route_clicked(Airport& start, Airport& end);
 
 private:
 

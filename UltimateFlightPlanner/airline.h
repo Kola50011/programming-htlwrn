@@ -8,6 +8,7 @@
 #define AIRLINE_H
 
 #include <QString>
+#include <QMetaType>
 
 class Airline
 {
@@ -24,6 +25,8 @@ public:
   }
 
   Airline() {}
+  ~Airline() {}
 };
+Q_DECLARE_METATYPE(Airline)
 
 #endif // AIRLINE_H

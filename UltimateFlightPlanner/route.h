@@ -8,6 +8,7 @@
 #define ROUTE_H
 
 #include <string>
+#include <QMetaType>
 
 class Route
 {
@@ -24,5 +25,8 @@ public:
   }
 
   Route() {}
+  ~Route() {}
 };
+Q_DECLARE_METATYPE(Route)
+
 #endif // ROUTE_H

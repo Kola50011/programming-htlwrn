@@ -19,6 +19,11 @@ void DrawableMapWidget::paintEvent(QPaintEvent *event)
     painter.drawPixmap(0, 0, pixmap);
 }
 
+void DrawableMapWidget::on_calculate_route_clicked(Airport &start, Airport &end)
+{
+    qDebug() << "Calculating Route from" << start.name << "to" << end.name;
+}
+
 QPoint DrawableMapWidget::airportToPoint(Airport &airport)
 {
     return QPoint{
