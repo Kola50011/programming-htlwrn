@@ -3,6 +3,7 @@
 
 #include <QTcpSocket>
 #include <QDebug>
+#include <QtXml>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,7 +32,16 @@ void MainWindow::on_sendBtn_clicked()
         }
     }
 
-    sock->write(ui->sqlInput->text().toStdString().data());
+    QString xml_str;
+    QXmlStreamWriter xml_writer{&xml_str};
+
+    xml_writer.writeStartDocument();
+    xml_writer.writeTextElement("query", ui->sqlInput->text());
+    xml_writer.writeEndDocument();
+
+    qDebug() << xml_str;
+
+    sock->write(xml_str.toStdString().data());
     sock->flush();
 
 }
@@ -39,6 +49,13 @@ void MainWindow::on_sendBtn_clicked()
 void MainWindow::on_data_received()
 {
     QString repl = sock->readAll().toStdString().data();
+
     qDebug() << repl;
-    ui->messages->append(repl);
+
+    QXmlStreamReader reader{repl};
+    while (reader.readNextStartElement()) {
+        if (reader.name() == "reply") {
+            ui->messages->append(reader.readElementText());
+        }
+    }
 }

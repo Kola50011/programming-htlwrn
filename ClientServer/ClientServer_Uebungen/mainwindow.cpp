@@ -8,6 +8,8 @@
 #include <QSqlDatabase>
 #include <QSqlRecord>
 
+#include <QtXml>
+
 #include <iostream>
 #include "serversocket.h"
 
@@ -40,8 +42,17 @@ void MainWindow::on_new_connection()
     ss->start();
 }
 
-void MainWindow::on_sql_received(QString sql)
+void MainWindow::on_sql_received(QString _sql)
 {
+
+    QString sql;
+    QXmlStreamReader xml_reader{_sql};
+    while (xml_reader.readNextStartElement()) {
+        if (xml_reader.name() == "query") {
+            sql = xml_reader.readElementText();
+        }
+    }
+
     qDebug() << sql;
 
     QSqlQuery query;

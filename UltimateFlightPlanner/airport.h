@@ -9,6 +9,7 @@
 
 #include <QString>
 #include <QMetaType>
+#include <QVector>
 
 class Airport
 {
@@ -18,6 +19,7 @@ public:
   double longitude;
   QString name;
   QString iata;
+  QVector<Airport> connections;
 
   Airport(int _id, double _latitude, double _longitude, QString _name, QString _iata)
   {
