@@ -8,6 +8,7 @@
 #include <QSqlDatabase>
 #include <QSqlRecord>
 
+#include <QtXml>
 #include <QJsonObject>
 #include <QJsonDocument>
 
@@ -43,8 +44,18 @@ void MainWindow::on_new_connection()
     ss->start();
 }
 
-void MainWindow::on_sql_received(QString jsonString)
+void MainWindow::on_sql_received(QString _sql)
 {
+
+    // QString sql;
+    // QXmlStreamReader xml_reader{_sql};
+    // while (xml_reader.readNextStartElement()) {
+    //     if (xml_reader.name() == "query") {
+    //         sql = xml_reader.readElementText();
+    //     }
+    // }
+
+    QString jsonString{_sql};
     QByteArray jsonArray = jsonString.toStdString().data();
     QJsonDocument document = QJsonDocument::fromJson(jsonArray);
     QJsonObject jsonObject = document.object();

@@ -11,6 +11,7 @@
 #include "airline.h"
 #include "route.h"
 #include <memory>
+#include <QVector>
 
 using namespace std;
 
@@ -27,6 +28,8 @@ private:
         getAirports();
         get_airlines();
         get_routes();
+
+        fill_connections();
     }
 
     void getAirports()
@@ -95,6 +98,16 @@ private:
         }
 
         qDebug() << routes.size() << "Routes loaded from db";
+    }
+
+    void fill_connections() {
+        for (auto& airport : airports) {
+            for (auto& route : routes) {
+                if (route.start == airport.id) {
+                    airport.connections.append(airport_for_id(route.end));
+                }
+            }
+        }
     }
 
 

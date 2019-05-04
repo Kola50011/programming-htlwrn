@@ -3,6 +3,7 @@
 
 #include <QTcpSocket>
 #include <QDebug>
+#include <QtXml>
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -36,10 +37,18 @@ void MainWindow::on_sendBtn_clicked()
     toSend["input"] = ui->sqlInput->text();
     QJsonDocument document = QJsonDocument{toSend};
 
-    sock->write(document.toJson());
-    sock->flush();
+    // QString xml_str;
+    // QXmlStreamWriter xml_writer{&xml_str};
+    // xml_writer.writeStartDocument();
+    // xml_writer.writeTextElement("query", ui->sqlInput->text());
+    // xml_writer.writeEndDocument();
 
+    // qDebug() << xml_str;
+
+    // sock->write(xml_str.toStdString().data());
+    sock->write(document.toJson());
 }
+
 
 void MainWindow::on_data_received()
 {
@@ -49,4 +58,12 @@ void MainWindow::on_data_received()
 
     qDebug() << repl;
     ui->messages->append(repl);
+
+    // QString repl = sock->readAll().toStdString().data();
+    // QXmlStreamReader reader{repl};
+    // while (reader.readNextStartElement()) {
+    //     if (reader.name() == "reply") {
+    //         ui->messages->append(reader.readElementText());
+    //     }
+    // }
 }
