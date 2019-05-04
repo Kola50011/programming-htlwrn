@@ -1,0 +1,33 @@
+@startuml mathparser
+
+class expression {
+    +{abstract} double evaluate()
+}
+
+class addition {
+    +addition(expression exp1, expression exp2)
+}
+
+class substraction {
+    +substraction(expression exp1, expression exp2)
+}
+
+class multiplication {
+    +multiplication(expression exp1, expression exp2)
+}
+
+class division {
+    +division(expression exp1, expression exp2)
+}
+
+class terminal {
+    +terminal(std::string num)
+}
+
+expression <|-down- addition
+expression <|-up- substraction
+expression <|-left- multiplication
+expression <|-right- division
+expression <|-- terminal
+
+@enduml
