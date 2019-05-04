@@ -4,6 +4,8 @@
 #include <QTcpSocket>
 #include <QDebug>
 #include <QtXml>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,31 +33,37 @@ void MainWindow::on_sendBtn_clicked()
             qDebug() << "Failed!";
         }
     }
+    QJsonObject toSend;
+    toSend["input"] = ui->sqlInput->text();
+    QJsonDocument document = QJsonDocument{toSend};
 
-    QString xml_str;
-    QXmlStreamWriter xml_writer{&xml_str};
+    // QString xml_str;
+    // QXmlStreamWriter xml_writer{&xml_str};
+    // xml_writer.writeStartDocument();
+    // xml_writer.writeTextElement("query", ui->sqlInput->text());
+    // xml_writer.writeEndDocument();
 
-    xml_writer.writeStartDocument();
-    xml_writer.writeTextElement("query", ui->sqlInput->text());
-    xml_writer.writeEndDocument();
+    // qDebug() << xml_str;
 
-    qDebug() << xml_str;
-
-    sock->write(xml_str.toStdString().data());
-    sock->flush();
-
+    // sock->write(xml_str.toStdString().data());
+    sock->write(document.toJson());
 }
+
 
 void MainWindow::on_data_received()
 {
-    QString repl = sock->readAll().toStdString().data();
+    QJsonDocument document = QJsonDocument::fromJson(sock->readAll());
+    QJsonObject jsonObject = document.object();
+    QString repl = jsonObject["input"].toString();
 
     qDebug() << repl;
+    ui->messages->append(repl);
 
-    QXmlStreamReader reader{repl};
-    while (reader.readNextStartElement()) {
-        if (reader.name() == "reply") {
-            ui->messages->append(reader.readElementText());
-        }
-    }
+    // QString repl = sock->readAll().toStdString().data();
+    // QXmlStreamReader reader{repl};
+    // while (reader.readNextStartElement()) {
+    //     if (reader.name() == "reply") {
+    //         ui->messages->append(reader.readElementText());
+    //     }
+    // }
 }

@@ -9,6 +9,8 @@
 #include <QSqlRecord>
 
 #include <QtXml>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 #include <iostream>
 #include "serversocket.h"
@@ -45,13 +47,19 @@ void MainWindow::on_new_connection()
 void MainWindow::on_sql_received(QString _sql)
 {
 
-    QString sql;
-    QXmlStreamReader xml_reader{_sql};
-    while (xml_reader.readNextStartElement()) {
-        if (xml_reader.name() == "query") {
-            sql = xml_reader.readElementText();
-        }
-    }
+    // QString sql;
+    // QXmlStreamReader xml_reader{_sql};
+    // while (xml_reader.readNextStartElement()) {
+    //     if (xml_reader.name() == "query") {
+    //         sql = xml_reader.readElementText();
+    //     }
+    // }
+
+    QString jsonString{_sql};
+    QByteArray jsonArray = jsonString.toStdString().data();
+    QJsonDocument document = QJsonDocument::fromJson(jsonArray);
+    QJsonObject jsonObject = document.object();
+    QString sql = jsonObject["input"].toString();
 
     qDebug() << sql;
 
