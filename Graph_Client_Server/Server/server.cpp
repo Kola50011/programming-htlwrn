@@ -5,8 +5,6 @@ server::server(quint16 port)
     tcp_server = new QTcpServer{};
     tcp_server->listen(QHostAddress::Any, port);
     connect(tcp_server, &QTcpServer::newConnection, this, &server::on_incomming_connection);
-
-    //graph->get_route_breadth_first_search("Wien", "Bregenz");
 }
 
 //server::~server()
@@ -45,22 +43,30 @@ void server::on_route_received(QString xml)
 
     qDebug() << "Calculating Route!";
     std::vector<Node*> vctr = graph->get_route(route[0].toStdString(), route[1].toStdString());
-    //graph->get_route_breadth_first_search(route[0].toStdString(), route[1].toStdString());
-
+    auto bws = graph->get_route_breadth_first_search(route[0].toStdString(), route[1].toStdString());
     qDebug() << "Calculated Route!";
-    QString msg{};
-    if (vctr.size() != 0) {
 
-        msg.append(vctr[0]->name.data());
-        for (size_t i{1}; i < vctr.size(); i++) {
-            msg.append((" -> " + vctr[i]->name).data());
-        }
-        msg.prepend("Route: ");
+    QString xml_output;
+    QXmlStreamWriter xml_w{&xml_output};
 
-
-    } else {
-        msg = "No route found!";
+    xml_w.writeStartDocument();
+    xml_w.writeStartElement("routes");
+    xml_w.writeStartElement("fastest_route");
+    for (Node* node : vctr) {
+        xml_w.writeTextElement("stop", node->name.data());
     }
+    xml_w.writeEndElement();
 
-    reinterpret_cast<client_connection*>(sender())->on_route_calculated(msg);
+    for (auto& route : bws) {
+        xml_w.writeStartElement("route");
+        for (Node* stop : route) {
+            xml_w.writeTextElement("stop", stop->name.data());
+        }
+        xml_w.writeEndElement();
+    }
+    xml_w.writeEndElement();
+    xml_w.writeEndDocument();
+
+
+    reinterpret_cast<client_connection*>(sender())->on_route_calculated(xml_output);
 }

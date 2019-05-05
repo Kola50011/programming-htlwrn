@@ -31,6 +31,9 @@
          <property name="toolTip">
           <string>Seperate stops with ;</string>
          </property>
+         <property name="text">
+          <string>Wien; Bregenz</string>
+         </property>
          <property name="placeholderText">
           <string>Please insert your stops here...</string>
          </property>

@@ -46,7 +46,12 @@ expression = expression operation expression | number | (expression)
 | Typ-0    | unbeschränkte Sprachen     | beliebige Grammatik     |
 | Typ-1 | kontextsensitive Sprachen | kontextsensitive Grammatik |
 | Typ-2 | kontextfreie Sprachen | kontextfreie Grammatik |
-| Typ-3 | reguläre Sprachen | reguläre Grammatik | 
+| Typ-3 | reguläre Sprachen | reguläre Grammatik |
+
+- **Typ-0**: Unbeschränkte Sprache -> natürliche Sprachen; Gramatik ist zu komplex, um sie zu beschreiben zu können oder nicht immer umsetzbar in eine Grammatik
+- **Typ-1**: Beschreibbar; Es ist klar basierend auf zuvor gelesenen Zeichen/folgenden Zeichen klar ist, welche Produktionsregel verwendet werden muss
+- **Typ-2**: Es ist immer klar, egal welches Wort man ansieht, welche Produktionsregel einzusetzen ist
+- **Typ-3**: Ein Automat der als ganzes die Sprache beschreibt (z.B.: Regular Expression(s))
 
 ## C
 

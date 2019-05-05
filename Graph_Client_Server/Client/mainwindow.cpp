@@ -32,9 +32,31 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_ready_read()
 {
-    auto msg = sock->readAll();
-    qDebug() << msg;
-    ui->label->setText(msg);
+    QString text{"Cheapest Route: \n"};
+    ui->label->setText(text);
+    QString msg = sock->readAll();
+    QXmlStreamReader* xml = new QXmlStreamReader{msg};
+    while (!xml->atEnd()) {
+        xml->readNext();
+        if (xml->name() == "fastest_route") {
+            while (xml->readNextStartElement()) {
+                //qDebug() << xml->name();
+                text.append(xml->readElementText());
+                text.append(" -> ");
+            }
+            text.chop(4);
+            text.append("\nAdditional Routes:\n");
+        } else if (xml->name() == "route") {
+            while (xml->readNextStartElement()) {
+                //qDebug() << xml->name();
+                text.append(xml->readElementText());
+                text.append(" -> ");
+            }
+            text.chop(4);
+            text.append("\n");
+        }
+    }
+    ui->label->setText(text);
 }
 
 void MainWindow::on_pushButton_clicked()
