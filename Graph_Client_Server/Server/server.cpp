@@ -6,7 +6,7 @@ server::server(quint16 port)
     tcp_server->listen(QHostAddress::Any, port);
     connect(tcp_server, &QTcpServer::newConnection, this, &server::on_incomming_connection);
 
-    graph->get_route_breadth_first_search("Wien", "Bregenz");
+    //graph->get_route_breadth_first_search("Wien", "Bregenz");
 }
 
 //server::~server()
@@ -20,8 +20,8 @@ void server::on_incomming_connection()
     QTcpSocket* sock = tcp_server->nextPendingConnection();
     client_connection* conn = new client_connection{sock};
 
-    connect(conn, &client_connection::route_received, this, &server::on_route_received);
-    connect(this, &server::route_calculated, conn, &client_connection::on_route_calculated);
+    connect(conn, &client_connection::route_received, this, &server::on_route_received, Qt::DirectConnection);
+    //connect(this, &server::route_calculated, conn, &client_connection::on_route_calculated, Qt::DirectConnection);
 
     conn->start();
 
@@ -45,7 +45,7 @@ void server::on_route_received(QString xml)
 
     qDebug() << "Calculating Route!";
     std::vector<Node*> vctr = graph->get_route(route[0].toStdString(), route[1].toStdString());
-    graph->get_route_breadth_first_search(route[0].toStdString(), route[1].toStdString());
+    //graph->get_route_breadth_first_search(route[0].toStdString(), route[1].toStdString());
 
     qDebug() << "Calculated Route!";
     QString msg{};
@@ -62,5 +62,5 @@ void server::on_route_received(QString xml)
         msg = "No route found!";
     }
 
-    emit route_calculated(msg);
+    reinterpret_cast<client_connection*>(sender())->on_route_calculated(msg);
 }
