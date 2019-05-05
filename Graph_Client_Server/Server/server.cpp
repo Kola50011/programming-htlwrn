@@ -5,8 +5,6 @@ server::server(quint16 port)
     tcp_server = new QTcpServer{};
     tcp_server->listen(QHostAddress::Any, port);
     connect(tcp_server, &QTcpServer::newConnection, this, &server::on_incomming_connection);
-
-    graph->get_route_breadth_first_search("Wien", "Bregenz");
 }
 
 //server::~server()

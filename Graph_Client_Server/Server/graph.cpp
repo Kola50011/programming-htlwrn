@@ -1,6 +1,7 @@
 #include "graph.h"
 
-Graph::Graph() {
+Graph::Graph()
+{
     Node *eisenstadt = new Node("Eisenstadt", 10);
     Node *klagenfurt = new Node("Klagenfurt", 11);
     Node *sankt = new Node("Sankt Pölten", 5);
@@ -58,56 +59,62 @@ Graph::Graph() {
     wien->add_neighbour(sankt, 61);
 }
 
-std::vector<Node*> Graph::get_route(std::string from, std::string to)
+std::vector<Node *> Graph::get_route(std::string from, std::string to)
 {
-    std::vector<Node*> route;
-    std::unordered_map<Node*, int> cost_to_node;
-    std::unordered_map<Node*, Node*> path_to_node;
+    std::vector<Node *> route;
+    std::unordered_map<Node *, int> cost_to_node;
+    std::unordered_map<Node *, Node *> path_to_node;
 
-    std::priority_queue<std::pair<int, Node*>,
-            std::vector<std::pair<int, Node*>>,
-            std::greater<std::pair<int, Node*>>> prio_queue;
+    std::priority_queue<std::pair<int, Node *>,
+                        std::vector<std::pair<int, Node *>>,
+                        std::greater<std::pair<int, Node *>>>
+        prio_queue;
 
-    Node* start = get_node_from_name(from);
-    Node* destination = get_node_from_name(to);
+    Node *start = get_node_from_name(from);
+    Node *destination = get_node_from_name(to);
 
     prio_queue.push(std::make_pair(start->value, start));
 
     bool done = false;
-    while (prio_queue.size() != 0 && !done) {
-        Node* current = prio_queue.top().second;
+    while (prio_queue.size() != 0 && !done)
+    {
+        Node *current = prio_queue.top().second;
         prio_queue.pop();
 
-        Node* neighbour_node;
+        Node *neighbour_node;
         int conn_cost;
 
-        for (auto neighbour : current->connected) {
+        for (auto neighbour : current->connected)
+        {
             std::tie(neighbour_node, conn_cost) = neighbour;
 
             int new_cost = cost_to_node[current] + conn_cost + neighbour_node->value;
-            if (neighbour_node->name == destination->name) {
+            if (neighbour_node->name == destination->name)
+            {
                 path_to_node[neighbour_node] = current;
                 std::cout << "Found end with " + std::to_string(new_cost) + " from " + current->name << std::endl;
                 done = true;
-            } else if (cost_to_node.find(neighbour_node) == cost_to_node.end() || cost_to_node[neighbour_node] > new_cost) {
+            }
+            else if (cost_to_node.find(neighbour_node) == cost_to_node.end() || cost_to_node[neighbour_node] > new_cost)
+            {
                 std::cout << "Adding " + neighbour_node->name << std::endl;
                 path_to_node[neighbour_node] = current;
                 cost_to_node[neighbour_node] = new_cost;
                 prio_queue.push(std::make_pair(new_cost, neighbour_node));
             }
         }
-
     }
 
-    if (done) {
+    if (done)
+    {
 
-        Node* n = destination;
-        while (n->name != start->name) {
+        Node *n = destination;
+        while (n->name != start->name)
+        {
             route.push_back(n);
             n = path_to_node[n];
         }
         route.push_back(n);
-
     }
 
     std::reverse(route.begin(), route.end());
@@ -115,71 +122,107 @@ std::vector<Node*> Graph::get_route(std::string from, std::string to)
     return route;
 }
 
-std::vector<std::vector<Node *> > Graph::get_route_breadth_first_search(std::string from, std::string end)
+std::vector<std::vector<Node *>> Graph::get_route_breadth_first_search(std::string from, std::string end)
 {
-    std::vector<std::vector<Node*>> routes;
+    std::cout << "Start get_route_breadth_first_search" << std::endl;
+    std::vector<std::vector<Node *>> routes;
 
-    Node* start = get_node_from_name(from);
-    Node* destination = get_node_from_name(end);
+    Node *start = get_node_from_name(from);
+    Node *destination = get_node_from_name(end);
 
-    std::unordered_map<Node*, std::vector<Node*>> predecessors;
-    std::deque<Node*> to_visit;
+    std::unordered_map<Node *, bool> visited;
+    std::unordered_map<Node *, std::vector<Node *>> predecessors;
+    std::deque<Node *> to_visit;
 
     to_visit.push_front(start);
 
-    while (to_visit.size() != 0) {
-        auto* current = to_visit.back();
+    while (to_visit.size() != 0)
+    {
+        auto *current = to_visit.back();
         to_visit.pop_back();
 
-        for (auto& pair : current->connected) {
-            if (std::find(predecessors[pair.first].begin(), predecessors[pair.first].end(), current) == predecessors[pair.first].end()) {
-                predecessors[pair.first].push_back(current);
+        if (visited[current])
+        {
+            continue;
+        }
+        visited[current] = true;
+
+        for (auto &pair : current->connected)
+        {
+            if (!visited[pair.first])
+            {
                 to_visit.push_front(pair.first);
+                predecessors[pair.first].push_back(current);
             }
         }
 
-        if (current == destination) {
+        if (current == destination)
+        {
             break;
         }
     }
 
+    std::cout << "Predecessors: " << std::endl;
+    for (auto &root : predecessors)
+    {
+        std::cout << root.first->name << std::endl;
+        for (auto &node : predecessors[root.first])
+        {
+            std::cout << node->name << " ,";
+        }
+        std::cout << std::endl
+                  << std::endl;
+    }
 
-    auto& tmp = backtracking(predecessors, start, destination);
-//    for (auto& route : tmp) {
-//        for (auto* node : route) {
-//            std::cout << node->name << " ";
-//        }
-//        std::cout << std::endl;
-//    }
+    std::cout << "Backtracking: " << std::endl;
+
+    auto tmp = backtracking(predecessors, destination, start);
+    std::cout << "Size: " << tmp.size() << std::endl;
+
+    int depth = INT8_MAX;
+    for (auto &route : tmp)
+    {
+        if (route.size() < depth) {
+            depth = route.size();
+        }
+    }
+
+    for (auto &route : tmp)
+    {
+        if (route.size() <= depth) {
+            routes.push_back(route);
+        }
+    }
 
     return routes;
-
 }
 
-std::vector<std::vector<Node *>>& Graph::backtracking(std::unordered_map<Node *, std::vector<Node *> >& predecessors, Node *start_node, Node *destination)
+std::vector<std::vector<Node *>> Graph::backtracking(std::unordered_map<Node *, std::vector<Node *>> &predecessors, Node *start_node, Node *destination)
 {
-    std::vector<std::vector<Node*>> route;
-    if (start_node != destination) {
-        for (auto& node : predecessors[start_node]) {
-            auto _route = backtracking(predecessors, node, destination);
-            for (auto& r : _route) {
-                r.push_back(start_node);
-                route.push_back(r);
-            }
-        }
-    } else {
-        std::vector<std::vector<Node *> > tmp{{start_node}};
-        return tmp;
+    std::vector<std::vector<Node *>> ret;
+
+    if (start_node == destination) {
+        ret.push_back({start_node});
+        return ret;
     }
-    return route;
+
+    for (auto &predecessor : predecessors[start_node])
+    {
+        auto routes = backtracking(predecessors, predecessor, destination);
+        for (auto &route : routes) {
+            route.push_back(start_node);
+            ret.push_back(route);
+        }
+    }
+    return ret;
 }
-
-
 
 Node *Graph::get_node_from_name(std::string name)
 {
-    for (auto* n : nodes) {
-        if (n->name == name) {
+    for (auto *n : nodes)
+    {
+        if (n->name == name)
+        {
             return n;
         }
     }
