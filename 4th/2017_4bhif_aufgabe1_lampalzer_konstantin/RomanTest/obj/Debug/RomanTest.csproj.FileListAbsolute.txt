@@ -1,0 +1,16 @@
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\RomanTest.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\RomanTest.pdb
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Roman.exe
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Roman.pdb
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Roman.exe.config
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\obj\Debug\RomanTest.csprojResolveAssemblyReference.cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\obj\Debug\RomanTest.csproj.CoreCompileInputs.cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\obj\Debug\RomanTest.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\RomanTest\obj\Debug\RomanTest.pdb

@@ -1,0 +1,12 @@
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\obj\Debug\StackRechner.Properties.Resources.resources
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\obj\Debug\StackRechner.Rechner.resources
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\obj\Debug\StackRechner.csproj.GenerateResource.Cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\obj\Debug\StackRechner.csproj.CoreCompileInputs.cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\bin\Debug\StackRechner.exe.config
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\bin\Debug\StackRechner.exe
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\bin\Debug\StackRechner.pdb
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\obj\Debug\StackRechner.exe
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\obj\Debug\StackRechner.pdb
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe3_lampalzer_konstantin\StackRechner\obj\Debug\StackRechner.csprojResolveAssemblyReference.cache

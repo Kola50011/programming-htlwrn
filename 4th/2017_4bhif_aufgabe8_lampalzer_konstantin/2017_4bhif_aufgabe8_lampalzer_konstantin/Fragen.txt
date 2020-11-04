@@ -1,0 +1,10 @@
+﻿ 
+
+a) https://i-msdn.sec.s-msft.com/dynimg/IC76956.gif
+b) Graph and tree search algorithms
+	https://en.wikipedia.org/wiki/Tree_traversal
+c) Optimal: Dijkstra's algorithm https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+
+bla bla bla
+
+f) Siehe code

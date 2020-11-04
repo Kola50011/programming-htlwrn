@@ -1,0 +1,7 @@
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\.vs\2017_4bhif_aufgabe1_lampalzer_konstantin\lut\0\b\Roman\bin\Debug\Roman.exe.config
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\.vs\2017_4bhif_aufgabe1_lampalzer_konstantin\lut\0\b\Roman\bin\Debug\Roman.exe
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\.vs\2017_4bhif_aufgabe1_lampalzer_konstantin\lut\0\b\Roman\bin\Debug\Roman.pdb
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\.vs\2017_4bhif_aufgabe1_lampalzer_konstantin\lut\0\i\Roman\Debug\Roman.csprojResolveAssemblyReference.cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\.vs\2017_4bhif_aufgabe1_lampalzer_konstantin\lut\0\i\Roman\Debug\Roman.csproj.CoreCompileInputs.cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\.vs\2017_4bhif_aufgabe1_lampalzer_konstantin\lut\0\i\Roman\Debug\Roman.exe
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\.vs\2017_4bhif_aufgabe1_lampalzer_konstantin\lut\0\i\Roman\Debug\Roman.pdb

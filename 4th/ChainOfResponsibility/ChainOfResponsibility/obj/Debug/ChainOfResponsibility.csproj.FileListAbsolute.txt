@@ -1,0 +1,7 @@
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.csprojResolveAssemblyReference.cache
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.csproj.CoreCompileInputs.cache
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe.config
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.exe
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\ChainOfResponsibility\ChainOfResponsibility\bin\Debug\ChainOfResponsibility.pdb
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.exe
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\ChainOfResponsibility\ChainOfResponsibility\obj\Debug\ChainOfResponsibility.pdb

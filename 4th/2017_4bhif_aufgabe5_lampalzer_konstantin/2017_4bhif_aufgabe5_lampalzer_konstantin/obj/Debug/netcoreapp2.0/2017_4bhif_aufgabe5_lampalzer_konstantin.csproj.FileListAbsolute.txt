@@ -1,0 +1,11 @@
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\bin\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.deps.json
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\bin\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.runtimeconfig.json
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\bin\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.runtimeconfig.dev.json
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\bin\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.dll
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\bin\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.pdb
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\obj\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.csprojResolveAssemblyReference.cache
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\obj\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.csproj.CoreCompileInputs.cache
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\obj\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.AssemblyInfoInputs.cache
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\obj\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.AssemblyInfo.cs
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\obj\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.dll
+C:\Users\Koka\Google Drive\schule\4. Klasse\POS\2017_4bhif_aufgabe5_lampalzer_konstantin\2017_4bhif_aufgabe5_lampalzer_konstantin\obj\Debug\netcoreapp2.0\2017_4bhif_aufgabe5_lampalzer_konstantin.pdb

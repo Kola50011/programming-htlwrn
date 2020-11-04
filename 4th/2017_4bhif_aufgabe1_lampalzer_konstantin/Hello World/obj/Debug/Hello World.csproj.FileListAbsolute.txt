@@ -1,0 +1,6 @@
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\Hello World\bin\Debug\Hello World.exe.config
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\Hello World\bin\Debug\Hello World.exe
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\Hello World\bin\Debug\Hello World.pdb
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\Hello World\obj\Debug\Hello World.csproj.CoreCompileInputs.cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\Hello World\obj\Debug\Hello World.exe
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe1_lampalzer_konstantin\Hello World\obj\Debug\Hello World.pdb

@@ -1,0 +1,7 @@
+C:\Users\Koka\Google Drive\Schule Koka\4. Klasse\POS\2017_4bhif_aufgabe8_lampalzer_konstantin\2017_4bhif_aufgabe8_lampalzer_konstantin\obj\Debug\2017_4bhif_aufgabe8_lampalzer_konstantin.csprojResolveAssemblyReference.cache
+C:\Users\Koka\Google Drive\Schule Koka\4. Klasse\POS\2017_4bhif_aufgabe8_lampalzer_konstantin\2017_4bhif_aufgabe8_lampalzer_konstantin\obj\Debug\2017_4bhif_aufgabe8_lampalzer_konstantin.csproj.CoreCompileInputs.cache
+C:\Users\Koka\Google Drive\Schule Koka\4. Klasse\POS\2017_4bhif_aufgabe8_lampalzer_konstantin\2017_4bhif_aufgabe8_lampalzer_konstantin\bin\Debug\2017_4bhif_aufgabe8_lampalzer_konstantin.exe.config
+C:\Users\Koka\Google Drive\Schule Koka\4. Klasse\POS\2017_4bhif_aufgabe8_lampalzer_konstantin\2017_4bhif_aufgabe8_lampalzer_konstantin\bin\Debug\2017_4bhif_aufgabe8_lampalzer_konstantin.exe
+C:\Users\Koka\Google Drive\Schule Koka\4. Klasse\POS\2017_4bhif_aufgabe8_lampalzer_konstantin\2017_4bhif_aufgabe8_lampalzer_konstantin\bin\Debug\2017_4bhif_aufgabe8_lampalzer_konstantin.pdb
+C:\Users\Koka\Google Drive\Schule Koka\4. Klasse\POS\2017_4bhif_aufgabe8_lampalzer_konstantin\2017_4bhif_aufgabe8_lampalzer_konstantin\obj\Debug\2017_4bhif_aufgabe8_lampalzer_konstantin.exe
+C:\Users\Koka\Google Drive\Schule Koka\4. Klasse\POS\2017_4bhif_aufgabe8_lampalzer_konstantin\2017_4bhif_aufgabe8_lampalzer_konstantin\obj\Debug\2017_4bhif_aufgabe8_lampalzer_konstantin.pdb

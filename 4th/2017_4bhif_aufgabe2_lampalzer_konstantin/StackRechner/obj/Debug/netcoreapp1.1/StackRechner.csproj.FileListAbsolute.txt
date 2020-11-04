@@ -1,0 +1,10 @@
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\bin\Debug\netcoreapp1.1\StackRechner.deps.json
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\bin\Debug\netcoreapp1.1\StackRechner.runtimeconfig.json
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\bin\Debug\netcoreapp1.1\StackRechner.runtimeconfig.dev.json
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\bin\Debug\netcoreapp1.1\StackRechner.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\obj\Debug\netcoreapp1.1\StackRechner.csprojResolveAssemblyReference.cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\obj\Debug\netcoreapp1.1\StackRechner.csproj.CoreCompileInputs.cache
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\obj\Debug\netcoreapp1.1\StackRechner.AssemblyInfo.cs
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\bin\Debug\netcoreapp1.1\StackRechner.pdb
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\obj\Debug\netcoreapp1.1\StackRechner.dll
+C:\Users\Koka\OneDrive\schule\kl 4\pos\2017_4bhif_aufgabe2_lampalzer_konstantin\StackRechner\obj\Debug\netcoreapp1.1\StackRechner.pdb
